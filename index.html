@@ -1,0 +1,416 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Yeemian Select 的日本選品與營運工作站"><meta name="robots" content="noindex,nofollow"><title>日本選品誌｜Yeemian Select</title><style>/* Hallmark · v2.0.0 · shape: app screen · theme: Dashboard · genre: editorial · signature: dated buying register */
+/* critique: Larger product names and aligned release prices make each batch readable at a glance. */
+:root{--paper:#f6f5ef;--panel:#eeede4;--ink:#171c16;--muted:#545c50;--line:#d3d6ca;--accent:#205b3a;--white:#fffefa;--font:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif;--serif:Georgia,"Songti TC",serif}
+*{box-sizing:border-box}html,body{overflow-x:clip}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 var(--font)}a{color:inherit;text-underline-offset:4px}a:hover{color:var(--accent)}:focus-visible{outline:3px solid var(--accent);outline-offset:4px}h1,h2,h3,p{margin:0}h1,h2,h3{text-wrap:balance;overflow-wrap:break-word;min-width:0;line-height:1.15}button,input,select{font:inherit;color:inherit}button,select,summary{cursor:pointer}button,input,select{min-height:44px;border:1px solid var(--line);border-radius:0;background:var(--white);padding:8px 12px}button{background:var(--ink);color:var(--white)}button:hover{background:var(--accent)}.wrap{width:min(1280px,100% - 64px);margin-inline:auto}.top{border-bottom:1px solid var(--line)}.top .wrap{min-height:66px;display:flex;gap:24px;align-items:center;justify-content:space-between}.brand{font:700 24px/1 var(--serif);text-decoration:none}.nav{display:flex;flex-wrap:wrap;gap:20px;font-size:14px}.nav a[aria-current]{font-weight:700;color:var(--accent)}.mast{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:36px;align-items:end;padding:40px 0 24px;border-bottom:4px solid var(--ink)}h1{font-size:67px;letter-spacing:-.075em}.subtitle{color:var(--muted);margin-top:12px}.edition{display:flex;gap:20px;justify-content:flex-end;align-items:end}.edition strong{display:block;font:700 44px/1 var(--serif);letter-spacing:-.06em}.edition span,.meta,.note{color:var(--muted);font-size:14px}.edition>div+div{border-left:1px solid var(--line);padding-left:20px}.filters{padding:20px 0;display:flex;flex-wrap:wrap;gap:12px;align-items:end;border-bottom:1px solid var(--line)}.filters label{font-size:14px;display:grid;gap:4px}.search{flex:1;min-width:min(220px,100%)}.register-head,.item summary{display:grid;grid-template-columns:90px minmax(0,1fr) minmax(106px,.33fr) minmax(110px,.36fr) minmax(85px,.28fr);gap:20px;align-items:center}.register-head{padding:12px 0;color:var(--muted);font-size:14px;border-bottom:1px solid var(--ink)}.item{border-bottom:1px solid var(--line)}.item summary{list-style:none;min-height:92px;padding:12px 0}.item summary::-webkit-details-marker{display:none}.item summary:hover{background:var(--panel)}.item h2{font-size:23px;letter-spacing:-.035em}.priority{display:inline-block;color:var(--accent);font-weight:800}.value{font-weight:700;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.toggle{color:var(--accent);display:block;font-size:13px;font-weight:600}.toggle::before{content:"＋ "}details[open] .toggle::before{content:"− "}.details{padding:24px;background:var(--panel);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 24px;margin:0 0 16px}.details dl{margin:0;min-width:0}.details dt{font-size:14px;color:var(--muted)}.details dd{margin:4px 0 0;white-space:pre-line;overflow-wrap:anywhere}.details nav{grid-column:1/-1;display:flex;gap:20px;flex-wrap:wrap}.empty{padding:32px 0}.reportnav{display:flex;gap:20px;margin:16px 0 32px;flex-wrap:wrap}.reportnav a[aria-current]{color:var(--accent);font-weight:700}.report{margin:24px 0 44px}.report h2{font-size:28px;margin-bottom:12px}.table-scroll{overflow:auto}table{border-collapse:collapse;width:100%;min-width:630px;text-align:left}td,th{border-bottom:1px solid var(--line);padding:12px 16px 12px 0;vertical-align:top}th{font-size:14px;border-bottom-color:var(--ink)}.notes{margin-top:16px;display:grid;gap:8px}.notes p{border-bottom:1px solid var(--line);padding-bottom:8px}.notes b{margin-right:12px}footer{margin-top:44px;padding:20px 0 32px;border-top:1px solid var(--line);display:flex;gap:20px;justify-content:space-between;flex-wrap:wrap}[hidden]{display:none!important}
+@media(max-width:780px){.wrap{width:calc(100% - 32px)}.mast{grid-template-columns:1fr;gap:16px;padding-top:32px}h1{font-size:46px}.edition{justify-content:flex-start}.edition strong{font-size:36px}.register-head{display:none}.item summary{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:16px 0}.item summary>div:nth-child(2){grid-column:1/-1;grid-row:1}.item summary>div:first-child{grid-column:1/-1;grid-row:2}.item summary>div:nth-child(n+3)::before{content:attr(data-label);display:block;color:var(--muted);font-size:13px}.item h2{font-size:20px}.details{grid-template-columns:repeat(2,minmax(0,1fr));padding:16px}.nav{gap:12px}.brand{font-size:21px}}
+
+button:active{background:var(--muted)} a:active,summary:active{color:var(--accent)}
+button:disabled,input:disabled,select:disabled{background:var(--panel);color:var(--muted);cursor:not-allowed}
+
+/* Dashboard layout */
+:root{--paper:#f2f5fc;--panel:#f6f8fd;--ink:#192437;--muted:#52617a;--line:#dde5f1;--accent:#245ad0;--white:#fdfdff;--blue-soft:#e9f0ff;--teal:#087970;--teal-soft:#e1f6ef;--purple:#7251b8;--purple-soft:#f1ecff;--radius:16px;--shadow:0 3px 12px #1835670a}
+body{font-size:15px}.wrap{width:min(1380px,100% - 80px)}.top{background:var(--white)}.top .wrap{min-height:68px}.brand{display:flex;align-items:center;gap:12px;font:750 17px/1.2 var(--font)}.brand::before{content:"Y";display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--accent);color:var(--white);font-weight:800}.nav{gap:8px}.nav a,.reportnav a{text-decoration:none;padding:12px 16px;border-radius:8px}.nav a[aria-current],.reportnav a[aria-current]{background:var(--blue-soft);color:var(--accent)}.mast{display:block;padding:32px 0 20px;border:0}.mast h1{font-size:36px;letter-spacing:-.04em;text-wrap:balance}.subtitle{margin-top:8px}.edition{display:none}.overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,1.55fr);gap:16px;margin-bottom:24px}.kpi,.distribution,.report,.ledger{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.kpi,.distribution{padding:20px;min-height:144px}.kpi h2,.distribution h2{font:650 14px/1.4 var(--font);color:var(--muted)}.kpi strong{display:block;margin:16px 0 8px;font-size:35px;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.05em}.kpi small,.distribution small{font-size:13px;color:var(--muted)}.segments{display:flex;height:12px;background:var(--blue-soft);border-radius:8px;overflow:clip;margin:20px 0 12px}.seg{flex:var(--n);background:var(--accent)}.seg:nth-child(2){background:var(--teal)}.seg:nth-child(3){background:var(--purple)}.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--muted)}.legend b{color:var(--ink)}.legend span::before{content:"";display:inline-block;width:8px;height:8px;margin-right:4px;border-radius:2px;background:var(--accent)}.legend span:nth-child(2)::before{background:var(--teal)}.legend span:nth-child(3)::before{background:var(--purple)}.ledger{padding:20px 24px}.ledger>h2{font-size:21px}.filters{padding:16px 0;border:0}.filters label{color:var(--muted)}button,input,select{border-radius:8px;border-color:var(--line)}button{background:var(--accent);padding-inline:16px}.register-head,.item summary{grid-template-columns:92px minmax(0,1fr) minmax(100px,.36fr) minmax(100px,.34fr) minmax(85px,.28fr);padding-inline:12px}.register-head{background:var(--panel);border:0;border-radius:8px}.item summary{min-height:72px}.item h2{font-size:17px;letter-spacing:0;text-wrap:pretty}.item:last-child{border-bottom:0}.item .meta{font-size:13px}.priority{min-width:26px;text-align:center;border-radius:6px;background:var(--blue-soft);padding:4px 4px}.priority[data-priority=A]{color:var(--teal);background:var(--teal-soft)}.priority[data-priority=B]{color:var(--purple);background:var(--purple-soft)}.value{font-size:14px}.details{border-radius:8px}.report{padding:24px;margin:0 0 20px}.report h2{font-size:21px}.reportnav{margin:0 0 16px}.table-scroll{border-radius:8px}th{background:var(--panel);border:0}td,th{padding:12px}.report .overview{margin:0 0 20px}.public .register-head,.public .item summary{grid-template-columns:92px minmax(0,1fr) minmax(100px,.5fr) minmax(110px,.5fr)}.public .toggle{display:block}.highlight{display:grid;gap:16px;margin-bottom:20px}.highlight header{display:flex;justify-content:space-between;gap:12px}.track{height:8px;border-radius:6px;background:var(--blue-soft);overflow:clip}.track b{display:block;height:100%;width:var(--fill);border-radius:6px;background:var(--accent)}.track.threads b{background:var(--teal)}.bar-line{display:grid;grid-template-columns:82px minmax(0,1fr) 80px;align-items:center;gap:8px;font-size:13px;color:var(--muted)}.bar-line strong{text-align:right;color:var(--ink)}footer{font-size:14px;margin-top:24px}
+@media(max-width:960px){.wrap{width:calc(100% - 40px)}.overview{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:780px){.wrap{width:calc(100% - 24px)}.mast{padding-top:24px}.mast h1{font-size:30px}.top .wrap{gap:8px}.brand{font-size:14px;gap:8px}.brand::before{width:28px;height:28px}.nav{gap:4px}.nav a{padding:8px;font-size:13px}.overview{gap:8px;margin-bottom:16px}.kpi,.distribution{padding:12px;min-height:104px}.kpi strong{font-size:27px}.legend{gap:4px}.ledger,.report{padding:12px}.register-head{display:none}.item summary,.public .item summary{grid-template-columns:repeat(3,minmax(0,1fr));padding:12px 4px}.public .item summary{grid-template-columns:repeat(2,minmax(0,1fr))}.search{min-width:100%}.filters{gap:8px}.reportnav a{padding:8px}}
+
+.report-section-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:24px 0 12px}.report-section-head h2{font-size:22px}.report-section-head>span,.chart-caption,.chart-row small{color:var(--muted);font-size:14px}.posting-time{background:var(--blue-soft);color:var(--accent);padding:8px 12px;border-radius:8px;font-size:14px}.report-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:12px}.chart-panel{margin:0}.chart-panel h2{margin-bottom:4px}.chart-series{display:grid;gap:20px;margin-top:20px}.chart-label{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:4px;color:var(--muted)}.chart-label strong{font-size:23px;font-weight:750;letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums}.chart-row .track{height:10px}.chart-row small{display:block;margin-top:4px}.track.missing{background:var(--panel);border:1px dashed var(--line)}.report-disclosure{padding:0;margin-bottom:16px}.report-disclosure summary{padding:12px 20px;font-weight:650;color:var(--accent)}.report-disclosure-body{padding:0 20px 16px}.report-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:12px}.report-coverage{margin-bottom:20px;color:var(--muted);font-size:14px}.strategy-panel dl{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 24px}.strategy-panel dl>div{border-top:1px solid var(--line);padding-top:8px}.strategy-panel dt{color:var(--muted);font-size:14px}.strategy-panel dd{margin:4px 0 0}.reportnav a{min-width:68px;text-align:center}
+@media(max-width:780px){.report-grid,.strategy-panel dl{grid-template-columns:1fr}.report-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.chart-panel{padding:16px}.report-section-head h2{font-size:19px}}
+
+.account-matrix{min-width:0;table-layout:fixed}.account-matrix th[scope=row]{background:transparent;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.account-matrix th,.account-matrix td{padding:12px 8px;overflow-wrap:anywhere}.account-matrix td strong{display:block;font-variant-numeric:tabular-nums}.account-matrix small{display:block;width:fit-content}.data-tag{margin-top:4px;padding:2px 6px;background:var(--blue-soft);color:var(--accent);border-radius:4px;font-size:12px}.data-tag.limited{background:var(--purple-soft);color:var(--purple)}.cell-note{margin-top:4px;font-size:12px;color:var(--muted)}.posting-time small{display:block;color:var(--muted);font-size:12px}.product-comparison{margin:0;min-width:0}.product-comparison h3{font-size:20px}.product-comparison h4{margin:0;color:var(--muted);font-size:14px}.product-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}.product-metrics .chart-series{margin-top:12px;gap:12px}.product-metrics .chart-label{gap:4px;font-size:13px}.product-metrics .chart-label strong{font-size:17px}.product-note{margin-top:16px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+@media(max-width:420px){.product-metrics{grid-template-columns:1fr}.account-matrix th,.account-matrix td{padding:8px 4px}.report-disclosure-body{padding-inline:12px}}
+
+.details .line-copy{grid-column:1/-1}.details .line-copy dd{white-space:pre-wrap}
+.top .brand::before{content:none}.brand svg{display:block;width:49px;height:auto}.daily-overview{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:12px 0 24px}.daily-overview .kpi{padding:16px;min-height:138px}.daily-overview .kpi strong{font-size:clamp(18px,2.4vw,29px);display:block}.daily-overview .kpi small{color:var(--muted);display:block}.daily-overview .kpi .secondary{margin-top:6px}.story-summary{display:flex;gap:8px 20px;flex-wrap:wrap;align-items:baseline;margin-bottom:6px}.story-summary strong{font-size:22px;color:var(--accent)}@media(max-width:1050px){.daily-overview{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:640px){.daily-overview{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.daily-overview .kpi{padding:12px;min-height:108px}.brand svg{width:42px}}
+
+.trend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:12px;margin:12px 0}.trend-panel svg{display:block;width:100%;color:var(--accent)}.trend-panel svg text{font-size:14px;fill:var(--muted)}.quote-panel{max-width:850px;margin-bottom:24px}.quote-panel label{display:block;font-weight:650}.quote-panel input,.quote-panel select{width:100%;margin-top:4px}.quote-lookup{display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:8px}.quote-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:20px 0 12px}.quote-total{font-size:28px;color:var(--accent)}.quote-fields [hidden]{display:none}.platform-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.platform-card h3{display:flex;align-items:center;gap:8px;font-size:17px}.social-logo{width:26px;height:26px;border-radius:7px}.ig-logo{background:radial-gradient(circle at 25% 100%,#ffd600,#ff5100 30%,#ff008f 61%,#8b10ff 92%)}.threads-logo{background:#101010}.platform-card dl{margin:14px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.platform-card dt,.platform-card small{color:var(--muted);font-size:12px}.platform-card dd{margin:2px 0;font-size:clamp(16px,3vw,30px);font-weight:750}.daily-times.daily-overview{grid-template-columns:repeat(2,minmax(0,1fr))}.daily-times .kpi{min-height:0}.story-list{margin:10px 0 0;padding-left:24px}.story-list li{padding:8px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.story-list li span{display:inline-block;vertical-align:top;max-width:calc(100% - 105px)}.story-list li strong{float:right;color:var(--accent);font-size:13px}.story-list li::after{content:'';display:block;clear:both}@media(max-width:610px){.platform-grid{grid-template-columns:1fr}}</style></head><body class=""><header class="top"><div class="wrap"><a class="brand" href="#/" aria-label="Yeemian Select 選品目錄"><svg width="49" height="23" viewBox="0 0 203 95" aria-hidden="true" focusable="false" fill="currentColor"><path d="M10 0c9-1 13 3 11 12L12 61c-7 5-13 1-12-6L10 0zm31 6c2-6 8-7 14-6L36 91c-1 4-8 4-13 4L41 6zM73 0c8 0 13 3 11 11L74 62c-7 3-13-2-11-9L73 0zm32 0c8 0 12 3 10 11l-9 51c-7 3-13-2-11-9L105 0zm32 0c7 0 12 4 10 11l-9 51c-8 3-13-2-11-9L137 0zm53 0c-9 2-14 12-16 32-7 1-12-3-11-11l2-11c1-7 11-10 25-10zm2 31c9 0 12 5 11 12-1 15-8 21-27 20 12-6 14-18 16-32z"/></svg></a><nav class="nav" aria-label="主選單"><a href="#/" aria-current="page">選品目錄</a><a href="#/reports" >營運分析</a><a href="#/quote">快速報價</a></nav></div></header><main class="wrap"><header class="mast"><h1>日本選品誌</h1><p class="subtitle">日本新品、聯名與生活情報</p></header>
+  <section class="overview" aria-label="選品概況">
+    <div class="kpi"><h2>選品批次</h2><strong>11/27</strong><small>目前檢視日期</small></div>
+    <div class="kpi"><h2>符合篩選</h2><strong>6</strong><small>筆選品與情報</small></div>
+    <div class="kpi"><h2>已有建議售價</h2><strong>0</strong><small>筆選品</small></div>
+    <div class="distribution"><h2>優先等級分布</h2><div class="segments" aria-hidden="true"><div class="seg" style="--n:1"></div><div class="seg" style="--n:3"></div><div class="seg" style="--n:2"></div></div><div class="legend"><span>S <b>1</b></span><span>A <b>3</b></span><span>B <b>2</b></span></div></div>
+  </section>
+  <section class="ledger"><h2>選品清單</h2>
+  <form class="filters" action="/"><label class="search">商品搜尋<input type="search" name="q" maxlength="100" value="" placeholder="輸入商品、類別或發布方式"></label><label>批次日期<select name="date"><option value="11/27" selected>11/27</option><option value="11/26" >11/26</option><option value="11/25" >11/25</option><option value="all" >所有批次</option></select></label><label>優先等級<select name="priority"><option value="" selected>全部</option><option value="A" >A</option><option value="B" >B</option><option value="S" >S</option></select></label><button>套用篩選</button><a href="#/">清除</a></form>
+  <div class="register-head"><span>優先／日期</span><span>商品</span><span>發售</span><span>建議售價</span><span>毛利</span></div><details class="item"><summary><div><span class="priority" data-priority="S">S</span> <span class="meta">11/27</span></div><div><h2>哈利波特 × Monchhichi 聯名吊飾系列</h2><p class="meta">角色聯名 ／ 貼文</p></div><div class="value" data-label="發售">11/27起</div><div class="value" data-label="建議售價">未提供</div><div class="value" data-label="毛利">未提供<span class="toggle">商品詳情</span></div></summary><div class="details"><dl><dt>日幣單價</dt><dd>¥3,850至4,180</dd></dl><dl><dt>同業定價</dt><dd>暫無已核實報價</dd></dl><dl><dt>原價說明</dt><dd>兩款：霍格華茲制服蒙奇奇¥4,180、怪獸系列Babychhichi¥3,850</dd></dl><dl><dt>IG標題</dt><dd>蒙奇奇收到霍格華茲入學通知了？
+連貓頭鷹都幫牠準備好了。</dd></dl><dl class="line-copy"><dt>LINE 社群內文</dt><dd>蒙奇奇要去上魔法課了🪄
+
+蒙奇奇穿上霍格華茲制服，手上還抱著嘿美！另一款Babychhichi搭配玻璃獸，兩款分別約14及10.5公分高。魔法迷的包包又有新同學了😍</dd></dl><dl><dt>廣告投放建議</dt><dd>暫緩｜成本與同業價待查</dd></dl><dl><dt>備註</dt><dd>兩款｜庫存待查</dd></dl><nav aria-label="商品來源"><a href="https://www.monchhichi.co.jp/news/detail.php?id=1827" target="_blank" rel="noopener noreferrer">官方來源</a><a href="https://mono-hunt.com/2026/11/15/harry-potter-monchhichi-keychain-2026/" target="_blank" rel="noopener noreferrer">情報來源</a></nav></div></details><details class="item"><summary><div><span class="priority" data-priority="A">A</span> <span class="meta">11/27</span></div><div><h2>BEAMS HEART × 諾坦貓50週年聯名</h2><p class="meta">服飾生活聯名 ／ 貼文</p></div><div class="value" data-label="發售">11/27</div><div class="value" data-label="建議售價">未提供</div><div class="value" data-label="毛利">未提供<span class="toggle">商品詳情</span></div></summary><div class="details"><dl><dt>日幣單價</dt><dd>¥2,750至9,900（已確認款）</dd></dl><dl><dt>同業定價</dt><dd>暫無已核實報價</dd></dl><dl><dt>原價說明</dt><dd>13款；吊飾¥2,750/2,970、娃娃¥5,390</dd></dl><dl><dt>IG標題</dt><dd>這隻貓今天拒絕起床。
+連BEAMS都陪牠一起賴床。</dd></dl><dl class="line-copy"><dt>LINE 社群內文</dt><dd>這次的聯名好適合冬天😍
+
+兩個50週年的品牌一起推出睡覺主題聯名！有毛絨娃娃、吊飾、襪子、帽子、毯子和親子居家服。購買聯名有機會獲得三款之一的限量贈品，送完為止。</dd></dl><dl><dt>廣告投放建議</dt><dd>暫緩｜成本與同業價待查</dd></dl><dl><dt>備註</dt><dd>13款｜贈品送完為止</dd></dl><nav aria-label="商品來源"><a href="https://www.beams.co.jp/company/information/pressrelease/275" target="_blank" rel="noopener noreferrer">官方來源</a><a href="https://www.beams.co.jp/tag/2026nontan/" target="_blank" rel="noopener noreferrer">情報來源</a></nav></div></details><details class="item"><summary><div><span class="priority" data-priority="A">A</span> <span class="meta">11/27</span></div><div><h2>G-SHOCK × XG 第二彈聯名腕錶</h2><p class="meta">潮流配件 ／ 動態</p></div><div class="value" data-label="發售">11/27</div><div class="value" data-label="建議售價">未提供</div><div class="value" data-label="毛利">未提供<span class="toggle">商品詳情</span></div></summary><div class="details"><dl><dt>日幣單價</dt><dd>¥39,600</dd></dl><dl><dt>同業定價</dt><dd>暫無已核實報價</dd></dl><dl><dt>原價說明</dt><dd>GM-6900XG 含稅¥39,600</dd></dl><dl><dt>IG標題</dt><dd>XG把時間變成刺青了？
+這次連手腕都要出道。</dd></dl><dl class="line-copy"><dt>LINE 社群內文</dt><dd>ALPHAZ看過來🤫
+
+銀色金屬錶圈搭配透明錶帶，設計概念是刻在身上的時間，特別包裝還有象徵七位成員的狼圖案。高單價，先確認台灣通路與日本庫存。</dd></dl><dl><dt>廣告投放建議</dt><dd>暫緩｜成本與同業價待查</dd></dl><dl><dt>備註</dt><dd>高單價｜先查台灣售價</dd></dl><nav aria-label="商品來源"><a href="https://www.casio.co.jp/release/2026/1112-gm-6900xg/" target="_blank" rel="noopener noreferrer">官方來源</a><a href="https://mono-hunt.com/2026/11/25/gshock-xg-gm6900xg8jr-nov2026/" target="_blank" rel="noopener noreferrer">情報來源</a></nav></div></details><details class="item"><summary><div><span class="priority" data-priority="A">A</span> <span class="meta">11/27</span></div><div><h2>Qu’il fait bon 新宿甜點咖啡廳開幕</h2><p class="meta">日本新店情報 ／ 情報分享</p></div><div class="value" data-label="發售">11/28</div><div class="value" data-label="建議售價">未提供</div><div class="value" data-label="毛利">未提供<span class="toggle">商品詳情</span></div></summary><div class="details"><dl><dt>IG標題</dt><dd>新宿又多了一個吃甜點的理由。
+逛街的熱量交給水果塔。</dd></dl><dl class="line-copy"><dt>LINE 社群內文</dt><dd>明天去新宿的人可以收藏🍓
+
+11/28開幕，新宿站西口旁，西新宿1-9-1明治安田新宿大樓1F，設46席咖啡座。營業11:00–20:00，內用最後點餐19:30，餐點價格待查。</dd></dl><dl><dt>廣告投放建議</dt><dd>純分享｜不投放</dd></dl><dl><dt>備註</dt><dd>新宿西口｜11:00至20:00</dd></dl><nav aria-label="商品來源"><a href="https://www.quil-fait-bon.com/pages/shinjuku" target="_blank" rel="noopener noreferrer">官方來源</a><a href="https://en.www.quil-fait-bon.com/blogs/news/shinjuku-open-2026" target="_blank" rel="noopener noreferrer">情報來源</a></nav></div></details><details class="item"><summary><div><span class="priority" data-priority="B">B</span> <span class="meta">11/27</span></div><div><h2>gelato pique café APPLE &amp; MOCHA 冬季甜點</h2><p class="meta">日本美食情報 ／ 趣味分享</p></div><div class="value" data-label="發售">11/27至2027/1/18</div><div class="value" data-label="建議售價">未提供</div><div class="value" data-label="毛利">未提供<span class="toggle">商品詳情</span></div></summary><div class="details"><dl><dt>IG標題</dt><dd>把蘋果派捲進可麗餅了？
+冬天的熱量果然很有創意。</dd></dl><dl class="line-copy"><dt>LINE 社群內文</dt><dd>蘋果派跟咖啡合體啦🍎
+
+冬季限定蘋果摩卡可麗餅，以烤蘋果冰淇淋、咖啡奶油與酥脆派皮呈現蘋果派口感。每日限量，另有摩卡霜淇淋等品項；供應門市與價格需再核對。</dd></dl><dl><dt>廣告投放建議</dt><dd>純分享｜不投放</dd></dl><dl><dt>備註</dt><dd>每日限量｜官方價格待查</dd></dl><nav aria-label="商品來源"><a href="https://www.fashion-press.net/news/calendar/from%3Atoday/" target="_blank" rel="noopener noreferrer">情報來源</a></nav></div></details><details class="item"><summary><div><span class="priority" data-priority="B">B</span> <span class="meta">11/27</span></div><div><h2>富士急官方飯店角落生物主題客房</h2><p class="meta">日本旅遊情報 ／ 情報分享</p></div><div class="value" data-label="發售">11/28</div><div class="value" data-label="建議售價">未提供</div><div class="value" data-label="毛利">未提供<span class="toggle">商品詳情</span></div></summary><div class="details"><dl><dt>IG標題</dt><dd>角落生物居然開房間了？
+這次可以名正言順躲在角落。</dd></dl><dl class="line-copy"><dt>LINE 社群內文</dt><dd>去日本跟角落生物一起過夜🫣
+
+富士急樂園官方飯店將推出日本首間常設角落生物主題客房，共兩種主題，以過夜聚會及尋找珍珠為靈感。房價、預約方式與完整地址尚待官方核實。</dd></dl><dl><dt>廣告投放建議</dt><dd>純分享｜不投放</dd></dl><dl><dt>備註</dt><dd>山梨富士吉田｜房價待查</dd></dl><nav aria-label="商品來源"><a href="https://www.fashion-press.net/news/calendar/from%3Aweekend/" target="_blank" rel="noopener noreferrer">情報來源</a></nav></div></details></section><footer><span class="note">資料截至 2026/11/27 20:55（台北時間）</span><a href="https://docs.google.com/spreadsheets/d/1xG1pkDoBJOCay2lNq4pYRSFmco-A01qBgnFeUlU7u-Q/edit" target="_blank" rel="noopener noreferrer">開啟原始試算表</a></footer></main><script>
+const css = '';
+const sheet = 'https://docs.google.com/spreadsheets/d/1xG1pkDoBJOCay2lNq4pYRSFmco-A01qBgnFeUlU7u-Q/edit';
+const reportNames = ['日常數據更新', '每週營運分析', '每月營運報告'];
+const detailFields = [4,6,7,19,20,21,8,9,11,14,23];
+const snapshotKey = 'selection-snapshot.json';
+const escape = (v) => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shown = (v) => escape(v && v!=='—' ? String(v).replaceAll('–','至') : '未提供');
+const link = (url, label) => /^https:\/\//i.test(url ?? '') ? '<a href="'+escape(url)+'" target="_blank" rel="noopener noreferrer">'+label+'</a>' : '';
+const noCache = {'cache-control':'private, no-store','x-content-type-options':'nosniff'};
+const json = (body, status=200) => Response.json(body,{status,headers:noCache});
+
+function rowMarkup(r, labels, isPublic) {
+  return `<details class="item"><summary><div><span class="priority" data-priority="${escape(r[1])}">${escape(r[1])}</span> <span class="meta">${escape(r[0])}</span></div><div><h2>${escape(r[3]).replaceAll("&#39;","’")}</h2><p class="meta">${[r[22],r[2]].filter(Boolean).map(escape).join(' ／ ')}</p></div><div class="value" data-label="發售">${shown(r[10])}</div><div class="value" data-label="建議售價">${shown(r[5])}${isPublic?'<span class="toggle">商品詳情</span>':''}</div>${isPublic?'':`<div class="value" data-label="毛利">${shown(r[20])}<span class="toggle">商品詳情</span></div>`}</summary><div class="details">${(isPublic?[4]:detailFields).filter(i=>r[i]).map(i=>`<dl${i===9?' class="line-copy"':''}><dt>${escape(labels[i])}</dt><dd>${i===9?escape(r[i]):shown(r[i])}</dd></dl>`).join('')}<nav aria-label="商品來源">${link(r[12],'官方來源')}${isPublic?'':link(r[13],'情報來源')}</nav></div></details>`;
+}
+
+function selection(values, params, isPublic) {
+  const [labels,...rows]=values;
+  const entries=rows.filter(r=>r[0] && r[3]);
+  const dates=[...new Set(entries.map(r=>r[0]))];
+  const priorities=[...new Set(entries.map(r=>r[1]).filter(Boolean))].sort();
+  const date=params.get('date') ?? dates[0];
+  const priority=params.get('priority') ?? '';
+  const query=params.get('q')?.trim().slice(0,100) ?? '';
+  const visible=entries.filter(r=>(date==='all'||r[0]===date)&&(!priority||r[1]===priority)&&(!query||[r[3],r[22],r[2]].some(v=>String(v??'').toLowerCase().includes(query.toLowerCase()))));
+  const option=(key,label,selected)=>`<option value="${escape(key)}" ${selected===key?'selected':''}>${escape(label)}</option>`;
+  const counts=['S','A','B'].map(k=>visible.filter(r=>r[1]===k).length);
+  const sellable=visible.filter(r=>r[5]).length;
+  return `<header class="mast"><h1>日本選品誌</h1><p class="subtitle">日本新品、聯名與生活情報</p></header>
+  <section class="overview" aria-label="選品概況">
+    <div class="kpi"><h2>選品批次</h2><strong>${escape(date==='all'?dates[0]:date)||'未提供'}</strong><small>${date==='all'?'最新批次':'目前檢視日期'}</small></div>
+    <div class="kpi"><h2>符合篩選</h2><strong>${visible.length}</strong><small>筆選品與情報</small></div>
+    <div class="kpi"><h2>已有建議售價</h2><strong>${sellable}</strong><small>筆選品</small></div>
+    <div class="distribution"><h2>優先等級分布</h2><div class="segments" aria-hidden="true">${counts.map(n=>`<div class="seg" style="--n:${n}"></div>`).join('')}</div><div class="legend">${['S','A','B'].map((k,i)=>`<span>${k} <b>${counts[i]}</b></span>`).join('')}</div></div>
+  </section>
+  <section class="ledger"><h2>選品清單</h2>
+  <form class="filters" action="/"><label class="search">商品搜尋<input type="search" name="q" maxlength="100" value="${escape(query)}" placeholder="輸入商品、類別或發布方式"></label><label>批次日期<select name="date">${dates.map(d=>option(d,d,date)).join('')}${option('all','所有批次',date)}</select></label><label>優先等級<select name="priority">${option('','全部',priority)}${priorities.map(v=>option(v,v,priority)).join('')}</select></label><button>套用篩選</button><a href="/">清除</a></form>
+  ${visible.length?`<div class="register-head"><span>優先／日期</span><span>商品</span><span>發售</span><span>建議售價</span>${isPublic?'':'<span>毛利</span>'}</div>${visible.map(r=>rowMarkup(r,labels,isPublic)).join('')}`:'<p class="empty">這個篩選沒有符合的選品。</p>'}</section>`;
+}
+
+function table(rows) {
+  if(rows.length<2)return '';
+  const [head,...body]=rows;
+  return `<div class="table-scroll" tabindex="0"><table><thead><tr>${head.map(v=>`<th scope="col">${escape(v)}</th>`).join('')}</tr></thead><tbody>${body.map(r=>`<tr>${head.map((_,i)=>`<td>${shown(r[i])}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+}
+function notes(rows) {
+  return `<div class="notes">${rows.filter(r=>r[0]).map(r=>`<p><b>${escape(r[0])}</b>${r.slice(1).filter(Boolean).map(escape).join(' ／ ')}</p>`).join('')}</div>`;
+}
+function metricNumber(value) {
+  const raw=String(value??'');
+  if(!/^\d[\d,]*$/.test(raw))return null;
+  const number=Number(raw.replaceAll(',',''));
+  return Number.isFinite(number)?number:null;
+}
+function chartSeries(rows) {
+  const peak=Math.max(1,...rows.map(r=>r.value??0));
+  return `<div class="chart-series">${rows.map(({label,value,date,tone})=>`<div class="chart-row"><div class="chart-label"><span>${escape(label)}</span><strong>${value===null?'未提供':value.toLocaleString('zh-TW')}</strong></div>
+    <div class="track ${tone??''} ${value===null?'missing':''}" aria-hidden="true"><b style="--fill:${100*(value??0)/peak}%"></b></div>${date?`<small>${escape(date)}</small>`:''}</div>`).join('')}</div>`;
+}
+function chart(title, rows, caption='') {
+  return `<section class="report chart-panel"><h2>${escape(title)}</h2>${caption?`<p class="chart-caption">${escape(caption)}</p>`:''}${chartSeries(rows)}</section>`;
+}
+function accountMatrix(labels, platforms, warning) {
+  return `<table class="account-matrix"><thead><tr><th scope="col">指標</th>${platforms.map(({row})=>`<th scope="col">${escape(row[0])}</th>`).join('')}</tr></thead>
+  <tbody>${labels.slice(1).map((label,position)=>{
+    const index=position+1;
+    return `<tr><th scope="row">${escape(label)}</th>${platforms.map(({row,dates})=>{
+      const date=String(dates[index]??'');
+      const value=metricNumber(row[index]);
+      const status=value===null?'missing':/未完結|有效紀錄/.test(date)?'limited':'dated';
+      return `<td><strong>${value===null?'未提供':value.toLocaleString('zh-TW')}</strong>${date&&date!=='尚無資料'?`<small class="data-tag ${status}">${escape(date)}</small>`:''}
+      ${index===1&&row[0]==='Instagram'&&warning?`<small class="cell-note">${escape(warning)}</small>`:''}</td>`;
+    }).join('')}</tr>`;
+  }).join('')}</tbody></table>`;
+}
+function productComparison(row) {
+  const series=index=>['Instagram','Threads'].map((label,i)=>({label,value:metricNumber(row[index+i]),tone:i?'threads':'',date:row[1+i]}));
+  return `<section class="report product-comparison"><h3>${escape(row[0])}</h3>
+  <div class="product-metrics"><div><h4>瀏覽次數</h4>${chartSeries(series(3))}</div><div><h4>按讚次數</h4>${chartSeries(series(5))}</div></div>
+  ${row[7]?`<p class="product-note">${escape(row[7])}</p>`:''}</section>`;
+}
+function disclosure(label, markup) {
+  return `<details class="report report-disclosure"><summary>${escape(label)}</summary><div class="report-disclosure-body">${markup}</div></details>`;
+}
+function statCards(stats) {
+  return `<div class="report-stats">${stats.map(([label,value,detail])=>`<div class="kpi"><h2>${escape(label)}</h2><strong>${shown(value)}</strong>${detail?`<small>${escape(detail)}</small>`:''}</div>`).join('')}</div>`;
+}
+function storyReport(group) {
+  if(!group?.items.length)return '';
+  const values=group.items.map(({impressions,exits})=>[metricNumber(impressions),metricNumber(exits)]);
+  const ready=values.every(([impressions,exits])=>impressions>0&&exits!==null&&exits<=impressions);
+  const totals=values.reduce(([views,left],[impressions,exits])=>[views+impressions,left+exits],[0,0]);
+  const rate=ready?(1-totals[1]/totals[0]).toLocaleString('zh-TW',{style:'percent',maximumFractionDigits:1}):'待補完整數據';
+  const list=group.items.map((story,i)=>{
+    const [views,exits]=values[i];
+    const retention=views>0&&exits!==null&&exits<=views?(1-exits/views).toLocaleString('zh-TW',{style:'percent',maximumFractionDigits:1}):'待補數據';
+    return `<li><span>${escape(story.caption||'未提供文字')}</span><strong>${retention}</strong></li>`;
+  }).join('');
+  return disclosure('Instagram 限動留存',`<div class="story-summary"><strong>${rate}</strong><span>${escape(group.date)} · ${group.items.length} 則整體留存</span></div>
+  <p class="chart-caption">${ready?'留存率依曝光及離開次數估算。':'部分限動缺少可用的曝光或離開數據。'}</p><ol class="story-list">${list}</ol>`);
+
+}
+function dailyReport(rows, stories) {
+  const account=rows.findIndex(r=>r[0]==='平台'&&r[1]==='粉絲數');
+  const pairs=rows.findIndex(r=>r[0]==='商品'&&String(r[1]).includes('IG'));
+  const pairedRows=pairs<0?[]:rows.slice(pairs+1).filter(r=>r[0]&&r[1]&&r[2]);
+  let body='';
+  if(account>=0){
+    const block=rows.slice(account+1,pairs>=0?pairs-1:rows.length);
+    const platforms=block.flatMap((r,i)=>['Instagram','Threads'].includes(r[0])?[{row:r,dates:block[i+1]??[]}]:[]);
+    const advice=block.find(r=>r[0]==='建議發文時間')?.[1];
+    const storyAdvice=block.find(r=>r[0]==='建議發限動時間')?.[1];
+    const growthNote=block.find(r=>r[0]==='IG 粉絲數備註')?.[1];
+    const heading=rows[account-1]?.[0];
+    const platformCards=platforms.map(({row,dates})=>{
+      const instagram=row[0]==='Instagram';
+      const logo=instagram
+        ?`<svg class="social-logo ig-logo" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="white" stroke-width="1.7"/><circle cx="12" cy="12" r="3.8" fill="none" stroke="white" stroke-width="1.7"/><circle cx="16.8" cy="7.5" r="1" fill="white"/></svg>`
+        :`<svg class="social-logo threads-logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 8.8C19.1 4.5 16.4 2.4 12 2.4 5.7 2.4 3.2 6.5 3.2 12.3c0 5.9 3 9.4 8.8 9.4 3.4 0 7.7-1.7 7.7-5.8 0-3.2-2.9-4.8-6.3-4.8-2.4 0-4.5.9-4.5 2.7 0 1.4 1.3 2.4 2.9 2.4 2.4 0 3.6-2 3.6-5 0-3-1.4-4.4-3.6-4.4-1.4 0-2.4.5-3.2 1.5" fill="none" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      const metrics=[['粉絲數',1],[instagram?'觀看':'瀏覽',2],['觸及',3]].map(([label,i])=>{
+        const value=metricNumber(row[i])?.toLocaleString('zh-TW')??'未提供';
+        const date=dates[i]&&dates[i]!=='尚無資料'?dates[i]:'';
+        return `<div><dt>${label}</dt><dd>${value}</dd>${date?`<small>${escape(date)}</small>`:''}</div>`;
+      }).join('');
+      return `<section class="report platform-card"><h3>${logo}${escape(row[0])}</h3><dl>${metrics}</dl></section>`;
+    }).join('');
+    const timeCard=(label,value,note)=>{
+      const [time,detail]=String(value??'').split('｜');
+      return `<div class="kpi"><h2>${label}</h2><strong>${escape(time.trim()||'待分析')}</strong><small>${escape(detail?.trim()||note)}</small></div>`;
+    };
+    body+=`<div class="report-section-head"><h2>${escape(heading?.includes('帳號概況')?heading.replace(/^[(（]([^）)]+)[)）]\s*/,'$1 '):'帳號概況')}</h2></div>
+      <div class="platform-grid">${platformCards}</div>
+      <section class="daily-overview daily-times" aria-label="推薦發布時間">${timeCard('推薦發文時間',advice,'Instagram')}${timeCard('推薦發限動時間',storyAdvice,'限動專屬數據待補')}</section>`;
+    if(platforms.length)body+=disclosure('帳號指標與資料日期',accountMatrix(rows[account],platforms,growthNote)+notes(block.filter(r=>r[0]==='首次同步，非單日新增').map(r=>['Threads 粉絲數',r[0]])));
+  }
+  body+=storyReport(stories);
+  if(pairedRows.length)body+=disclosure('同商品跨平台比較',`<div class="report-grid">${pairedRows.map(productComparison).join('')}</div>`);
+  return body||notes(rows);
+}
+const dailyTrend = {"instagram":{"20261122":[1474,215],"20261123":[370,104],"20261124":[1883,390],"20261125":[463,126],"20261126":[404,96]},"threads":{"20261104":116,"20261107":246,"20261110":217,"20261111":255,"20261116":246,"20261118":73,"20261125":4215,"20261126":3249}};
+function trendChart(label, days, values) {
+  const max=Math.max(1,...values.filter(v=>v!==null));
+  const x=i=>70+i*650/Math.max(1,days.length-1);
+  const y=v=>139-v/max*113;
+  const fmt=v=>v.toLocaleString('zh-TW',{maximumFractionDigits:0});
+  const date=d=>Number(d.slice(4,6))+'/'+Number(d.slice(6));
+  const segments=values.map((v,i)=>i&&v!==null&&values[i-1]!==null
+    ?`<line x1="${x(i-1)}" y1="${y(values[i-1])}" x2="${x(i)}" y2="${y(v)}" stroke="currentColor" stroke-width="2"/>`:'').join('');
+  const points=values.map((v,i)=>v===null?'':`<circle cx="${x(i)}" cy="${y(v)}" r="4" fill="currentColor"><title>${date(days[i])} · ${fmt(v)}</title></circle>`).join('');
+  const labels=days.map((d,i)=>i%Math.ceil(days.length/7)===0||i===days.length-1?`<text x="${x(i)}" y="162" text-anchor="middle">${date(d)}</text>`:'').join('');
+  return `<section class="report trend-panel"><h3>${escape(label)}</h3><svg viewBox="0 0 750 175" role="img" aria-label="${escape(label)}逐日折線圖">${[0,max/2,max].map(v=>`<line x1="70" x2="720" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="57" y="${y(v)+4}" text-anchor="end">${fmt(v)}</text>`).join('')}${segments}${points}${labels}</svg></section>`;
+}
+function trendReport(tab) {
+  const start=tab===1?20:1;
+  const days=Array.from({length:27-start},(_,i)=>'202611'+String(start+i).padStart(2,'0'));
+  const series=[
+    ['Instagram 觀看',days.map(d=>dailyTrend.instagram[d]?.[0]??null)],
+    ['Instagram 觸及',days.map(d=>dailyTrend.instagram[d]?.[1]??null)],
+    ['Threads 瀏覽',days.map(d=>dailyTrend.threads[d]??null)]
+  ];
+  return `<div class="report-section-head"><h2>每日走勢</h2></div><p class="report-coverage">來源為 Metricool。缺少紀錄的日期留白，圖上的點可查看當日數值。</p>
+  <div class="trend-grid">${series.map(([label,values])=>trendChart(label,days,values)).join('')}</div>
+  ${disclosure('逐日數據',table([['日期',...series.map(([label])=>label)],...days.map((d,i)=>[d.slice(4,6)+'/'+d.slice(6),...series.map(([,v])=>v[i]??'—')])]))}`;
+}
+
+const shippingClasses=[['吊飾／小物',100],['服飾／一般商品',150],['大型或厚重商品',200]];
+function quotePage() {
+  return `<header class="mast"><h1>快速報價</h1></header><section class="report quote-panel">
+  <form id="product-lookup" novalidate><label for="product-url">商品網址</label><div class="quote-lookup"><input id="product-url" type="text" inputmode="url" required placeholder="貼上日本商店的商品頁網址"><button>讀取商品</button></div>
+  <p id="quote-status" class="chart-caption" role="status">${location.protocol==='file:'?'雙擊同資料夾的 YMS-Quick-Quote.command 即可啟用網址讀取。也可以直接手動試算。':'支援提供商品結構化價格的公開商品頁。'}</p><a id="open-quote-service" href="http://127.0.0.1:18754/#/quote" hidden>開啟本機網址報價</a></form>
+  <form id="quote-calculator"><div class="quote-fields">
+  <label id="offer-field" hidden>商品價格／款式<select id="product-offer"></select></label>
+  <label>商品價格（日圓）<input id="product-price" type="number" min="1" step="1" required placeholder="輸入日幣價格"></label>
+  <label>商品類別<select id="quote-category" required><option value="">請選擇類別</option>${shippingClasses.map(([name],i)=>`<option value="${i}">${name}</option>`).join('')}</select></label>
+  <label>集運分攤（NT$）<input id="quote-shipping" type="number" value="100" min="0" step="1" required></label>
+  </div><button>計算報價</button></form><div id="quote-result" aria-live="polite"></div></section>`;
+}
+
+function calculateQuote(yen, category, shipping) {
+  const converted=yen*0.205;
+  const fee=Math.min(converted*0.1,500);
+  const tax=(converted+fee+shipping)*0.05;
+  const cost=converted+fee+shipping+tax;
+  const target=category===0?cost+375:cost/0.85;
+  const quote=Math.ceil(Math.max(cost+200,target)/10)*10;
+  return {converted,fee,tax,cost,quote,profit:quote-cost};
+}
+function parseProduct(html) {
+  const template=document.createElement('template');
+  template.innerHTML=html;
+  const tree=template.content;
+  const products=[];
+  function visit(node) {
+    if(Array.isArray(node)){node.forEach(visit);return;}
+    if(!node||typeof node!=='object')return;
+    if([node['@type']].flat().some(type=>typeof type==='string'&&/(^|\/)Product(Group)?$/.test(type)))products.push(node);
+    visit(node['@graph']); visit(node.hasVariant); visit(node.mainEntity);
+  }
+  for(const script of tree.querySelectorAll('script[type="application/ld+json"]')){
+    try{visit(JSON.parse(script.textContent));}catch{}
+  }
+  const meta=key=>tree.querySelector(`meta[property="${key}"],meta[name="${key}"]`)?.content;
+  const title=String(products[0]?.name??meta('og:title')??tree.querySelector('title')?.textContent??'商品');
+  const options=new Map();
+  function add(price,currency,name) {
+    if(price==null||String(currency).toUpperCase()!=='JPY')return;
+    const raw=String(price).replace(/[,¥￥\s]/g,'');
+    if(!/^\d+(?:\.0+)?$/.test(raw)||Number(raw)<=0||!Number.isSafeInteger(Number(raw)))return;
+    const item={price:Number(raw),name:String(name||'日幣售價')};
+    options.set(item.price+'|'+item.name,item);
+  }
+  function collect(offer,name,currency) {
+    if(!offer||typeof offer!=='object')return;
+    const unit=offer.priceCurrency??currency;
+    if(offer.price!=null)add(offer.price,unit,offer.name??name);
+    else if(offer.lowPrice!=null&&Number(offer.lowPrice)===Number(offer.highPrice))add(offer.lowPrice,unit,name);
+    for(const child of [offer.offers??[]].flat())collect(child,name,unit);
+  }
+  for(const product of products)for(const offer of [product.offers??[]].flat())collect(offer,product.name);
+  if(!options.size)add(meta('product:price:amount')??meta('og:price:amount'),meta('product:price:currency')??meta('og:price:currency'),title);
+  const categoryText=title+' '+products.map(p=>[p.category].flat().join(' ')).join(' ');
+  const category=/キーホルダー|チャーム|マスコット|吊飾|keychain|keyring|charm/i.test(categoryText)?0:/大型|家具|キャリーケース|特大|suitcase/i.test(categoryText)?2:/シャツ|パーカー|ジャケット|衣服|服飾|jacket|shirt|hoodie|pants/i.test(categoryText)?1:null;
+  return {title,category,options:[...options.values()]};
+}
+async function lookupQuote(form) {
+  const status=document.querySelector('#quote-status');
+  const button=form.querySelector('button');
+  const select=document.querySelector('#product-offer');
+  const field=form.querySelector('input');
+  const serviceLink=document.querySelector('#open-quote-service');
+  let productUrl;
+  try{
+    const input=field.value.trim();
+    if(!input)throw new Error();
+    productUrl=new URL(/^[a-z]+:\/\//i.test(input)?input:'https://'+input);
+    if(productUrl.protocol!=='https:'||!productUrl.hostname.includes('.')||productUrl.username||productUrl.password)throw new Error();
+  }catch{
+    status.textContent='請貼上完整的商店商品網址。';
+    field.focus();
+    return;
+  }
+  if(location.origin!=='http://127.0.0.1:18754'){
+    serviceLink.href='http://127.0.0.1:18754/#/quote?'+new URLSearchParams({url:productUrl.href});
+    serviceLink.hidden=false;
+    status.textContent='請先雙擊同資料夾的 YMS-Quick-Quote.command，再點下方連結。商品網址會一起帶過去。';
+    return;
+  }
+  serviceLink.hidden=true;
+  button.disabled=true;
+  document.querySelector('#product-price').value='';
+  document.querySelector('#quote-result').replaceChildren();
+  select.replaceChildren();
+  select.parentElement.hidden=true;
+  status.textContent='正在讀取商品頁…';
+  try{
+    const response=await fetch('/product?'+new URLSearchParams({url:productUrl.href}),{headers:{'X-YMS-Quote':'1'},signal:AbortSignal.timeout(16000)});
+    const payload=await response.json();
+    if(!response.ok)throw new Error(payload.error);
+    const product=parseProduct(payload.html);
+    if(!product.options.length)throw new Error('沒有找到明確的日幣售價。請確認商品款式與價格後手動填入。');
+    if(product.category!==null)applyQuoteCategory(product.category);
+    else document.querySelector('#quote-category').value='';
+    select.add(new Option('請選擇售價',''));
+    for(const option of product.options)select.add(new Option(option.name+' · ¥'+option.price.toLocaleString('ja-JP'),option.price));
+    if(product.options.length===1){
+      document.querySelector('#product-price').value=product.options[0].price;
+      renderQuote();
+    }else select.parentElement.hidden=false;
+    const warning=product.category===null?' · 請確認適用商品類別':' · 已帶入可能的類別，可更改';
+    status.textContent=product.title+(product.options.length>1?' · 請選擇款式價格':'')+warning;
+  }catch(error){status.textContent=error.name==='TimeoutError'?'讀取逾時，請重試或手動輸入日幣價格。':error instanceof TypeError?'無法連到報價服務，請確認啟動視窗仍開著。':error.message||'讀取失敗，請手動輸入。';}
+  finally{button.disabled=false;}
+}
+function applyQuoteCategory(index) {
+  document.querySelector('#quote-category').value=index;
+  document.querySelector('#quote-shipping').value=shippingClasses[index][1];
+}
+function renderQuote() {
+  const form=document.querySelector('#quote-calculator');
+  const result=document.querySelector('#quote-result');
+  if(!form.checkValidity()){result.replaceChildren();return;}
+  const get=id=>Number(document.querySelector(id).value);
+  const {converted,fee,tax,cost,quote,profit}=calculateQuote(get('#product-price'),get('#quote-category'),get('#quote-shipping'));
+  const nt=value=>'NT$ '+value.toLocaleString('zh-TW',{maximumFractionDigits:2});
+  result.innerHTML=`<div class="report-section-head"><h2>建議售價</h2><strong class="quote-total">${nt(quote)}</strong></div>
+    ${statCards([['商品換算',nt(converted)],['買手費',nt(fee)],['集運',nt(get('#quote-shipping'))],['稅金',nt(tax)],['總成本',nt(cost)],['預估毛利',nt(profit)]])}`;
+}
+
+function periodReport(rows, tab) {
+  const head=rows.findIndex(r=>['期間','月份'].includes(r[0]));
+  if(head<0)return notes(rows);
+  const candidate=rows.slice(head+1);
+  const end=candidate.findIndex(r=>!r[0]||['已知觀看','資料覆蓋','內容觀察','下一步'].includes(r[0]));
+  const count=end<0?candidate.length:end;
+  const values=candidate.slice(0,count);
+  const context=candidate.slice(count).filter(r=>r[0]);
+  const current=values[0];
+  if(!current)return notes(rows);
+  const fields=Object.fromEntries(rows[head].map((label,i)=>[label,current[i]]));
+  const summary=context.find(r=>r[0]==='已知觀看')??[];
+  const facts=Object.fromEntries(summary.flatMap((label,i)=>i%2===0?[[label,summary[i+1]]]:[]));
+  const coverage=context.find(r=>r[0]==='資料覆蓋')?.[1];
+  const strategy=[['熱門商品',fields['熱門商品']],['最佳發文時間',fields['最佳發文時間']],['內容策略',fields['策略建議']??fields['內容策略']],
+   ...context.filter(r=>['內容觀察','下一步'].includes(r[0])).map(r=>[r[0],r[1]])].filter(([,v])=>v);
+  return `<div class="report-section-head"><h2>${escape(current[0])}</h2></div>
+  ${statCards([['已知觀看',facts['已知觀看'],'次'],['觸及日值合計',facts['觸及日值合計']??fields['觸及'],'依來源報表統計'],['內容互動',fields['互動'],'次'],['最新粉絲數',facts['最新粉絲數'],fields['粉絲變化']||fields['粉絲成長']?'粉絲成長資料：'+(fields['粉絲變化']??fields['粉絲成長']):'']])}
+  ${coverage?`<p class="report-coverage">${escape(coverage)}</p>`:''}
+  ${trendReport(tab)}
+  ${strategy.length?`<section class="report strategy-panel"><h2>內容觀察與下一步</h2><dl>${strategy.map(([k,v])=>`<div><dt>${escape(k)}</dt><dd>${escape(v)}</dd></div>`).join('')}</dl></section>`:''}
+  ${disclosure('查看完整報表',table([rows[head],...values])+notes(context))}`;
+}
+function reports(snapshot, params) {
+  const tab=Math.max(0,['daily','weekly','monthly'].indexOf(params.get('period')));
+  const rows=snapshot.reports[tab];
+  const links=['daily','weekly','monthly'].map((k,i)=>`<a href="/reports?period=${k}" ${i===tab?'aria-current="page"':''}>${['每日','每週','每月'][i]}</a>`).join('');
+  const body=rows.length?(tab===0?dailyReport(rows,snapshot.stories):periodReport(rows,tab)):'<p>這一期還沒有報表。</p>';
+  return `<header class="mast"><h1>營運分析</h1></header><nav class="reportnav" aria-label="報表期間">${links}</nav>${body}`;
+}
+function page(snapshot,url,isPublic=false) {
+  const quote=!isPublic&&url.pathname==='/quote';
+  const report=!isPublic&&url.pathname==='/reports';
+  const updated=snapshot?new Intl.DateTimeFormat('zh-TW',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Taipei',hour12:false}).format(new Date(snapshot.syncedAt)):'等待首次同步';
+  return `<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Yeemian Select 的日本選品與營運工作站"><meta name="robots" content="noindex,nofollow"><title>${quote?'快速報價':report?'營運分析':'日本選品誌'}｜Yeemian Select</title><style>${css}</style></head><body class="${isPublic?'public':''}"><header class="top"><div class="wrap"><a class="brand" href="/" aria-label="Yeemian Select 選品目錄"><svg width="49" height="23" viewBox="0 0 203 95" aria-hidden="true" focusable="false" fill="currentColor"><path d="M10 0c9-1 13 3 11 12L12 61c-7 5-13 1-12-6L10 0zm31 6c2-6 8-7 14-6L36 91c-1 4-8 4-13 4L41 6zM73 0c8 0 13 3 11 11L74 62c-7 3-13-2-11-9L73 0zm32 0c8 0 12 3 10 11l-9 51c-7 3-13-2-11-9L105 0zm32 0c7 0 12 4 10 11l-9 51c-8 3-13-2-11-9L137 0zm53 0c-9 2-14 12-16 32-7 1-12-3-11-11l2-11c1-7 11-10 25-10zm2 31c9 0 12 5 11 12-1 15-8 21-27 20 12-6 14-18 16-32z"/></svg></a><nav class="nav" aria-label="主選單"><a href="/" ${report||quote?'':'aria-current="page"'}>選品目錄</a>${isPublic?'':`<a href="/reports" ${report?'aria-current="page"':''}>營運分析</a><a href="/quote" ${quote?'aria-current="page"':''}>快速報價</a>`}</nav></div></header><main class="wrap">${snapshot?(quote?quotePage():report?reports(snapshot,url.searchParams):selection(snapshot.picks,url.searchParams,isPublic)):'<div class="empty"><h1>日本選品誌</h1><p>目前無法載入選品資料。</p></div>'}<footer><span class="note">資料同步 ${escape(updated)}（台北時間）</span>${isPublic?'':link(sheet,'開啟原始試算表')}</footer></main></body></html>`;
+}
+
+
+const data = {"stories":{"date":"11/26","items":[{"id":"4038995328862300193","caption":"是誰需要掛號了🙋","type":"VIDEO","exits":2,"impressions":0,"reach":0,"replies":0,"back":1,"forward":27},{"id":"4038995368674695890","caption":"吉伊卡哇 診所系列🩺 醫生，我的症狀是看到可愛的就想買\n烏薩奇醫生來幫大家診療了","type":"IMAGE","exits":1,"impressions":0,"reach":0,"replies":0,"back":1,"forward":26},{"id":"4038995385183433440","caption":"醫生醫術不確定高不高明\n但護士是真的很有愛心💗 還穿上毛茸茸的針織毛衣😍","type":"IMAGE","exits":0,"impressions":0,"reach":0,"replies":0,"back":2,"forward":24},{"id":"4038995421422203652","caption":"大小參考 還是非常可愛的尺寸😍","type":"IMAGE","exits":2,"impressions":0,"reach":0,"replies":0,"back":1,"forward":21},{"id":"4038995469237230577","caption":"這次的新品😍\n滿滿的愛心護士","type":"IMAGE","exits":0,"impressions":0,"reach":0,"replies":0,"back":1,"forward":22},{"id":"4038995523285212641","caption":"\\ 這次還有小甲蟲 /","type":"IMAGE","exits":0,"impressions":0,"reach":0,"replies":0,"back":1,"forward":23},{"id":"4038995562652824226","caption":"還有兩位主治醫生🧑‍⚕️👓 戴上眼鏡超可愛 ==","type":"IMAGE","exits":0,"impressions":0,"reach":0,"replies":0,"back":2,"forward":22},{"id":"4038995796778875554","caption":"全系列商品都可以預約呦\n歡迎私訊😍","type":"IMAGE","exits":2,"impressions":0,"reach":0,"replies":0,"back":1,"forward":18}]},"picks":[["日期","優先","發布方式","商品","日幣單價","建議售價TWD","同業定價","原價說明","IG標題","LINE 社群內文","發售","廣告投放建議","官方來源","情報來源","負責人","匯率","集運TWD","買手費TWD","稅金TWD","成本TWD","毛利TWD","毛利率","類別","備註"],["11/27","S","貼文","哈利波特 × Monchhichi 聯名吊飾系列","¥3,850–4,180",null,"暫無已核實報價","兩款：霍格華茲制服蒙奇奇¥4,180、怪獸系列Babychhichi¥3,850","蒙奇奇收到霍格華茲入學通知了？\n連貓頭鷹都幫牠準備好了。","蒙奇奇要去上魔法課了🪄\n\n蒙奇奇穿上霍格華茲制服，手上還抱著嘿美！另一款Babychhichi搭配玻璃獸，兩款分別約14及10.5公分高。魔法迷的包包又有新同學了😍","11/27起","暫緩｜成本與同業價待查","https://www.monchhichi.co.jp/news/detail.php?id=1827","https://mono-hunt.com/2026/11/15/harry-potter-monchhichi-keychain-2026/",null,null,null,null,null,null,null,null,"角色聯名","兩款｜庫存待查"],["11/27","A","貼文","BEAMS HEART × 諾坦貓50週年聯名","¥2,750–9,900（已確認款）",null,"暫無已核實報價","13款；吊飾¥2,750/2,970、娃娃¥5,390","這隻貓今天拒絕起床。\n連BEAMS都陪牠一起賴床。","這次的聯名好適合冬天😍\n\n兩個50週年的品牌一起推出睡覺主題聯名！有毛絨娃娃、吊飾、襪子、帽子、毯子和親子居家服。購買聯名有機會獲得三款之一的限量贈品，送完為止。","11/27","暫緩｜成本與同業價待查","https://www.beams.co.jp/company/information/pressrelease/275","https://www.beams.co.jp/tag/2026nontan/",null,null,null,null,null,null,null,null,"服飾生活聯名","13款｜贈品送完為止"],["11/27","A","動態","G-SHOCK × XG 第二彈聯名腕錶","¥39,600",null,"暫無已核實報價","GM-6900XG 含稅¥39,600","XG把時間變成刺青了？\n這次連手腕都要出道。","ALPHAZ看過來🤫\n\n銀色金屬錶圈搭配透明錶帶，設計概念是刻在身上的時間，特別包裝還有象徵七位成員的狼圖案。高單價，先確認台灣通路與日本庫存。","11/27","暫緩｜成本與同業價待查","https://www.casio.co.jp/release/2026/1112-gm-6900xg/","https://mono-hunt.com/2026/11/25/gshock-xg-gm6900xg8jr-nov2026/",null,null,null,null,null,null,null,null,"潮流配件","高單價｜先查台灣售價"],["11/27","A","情報分享","Qu'il fait bon 新宿甜點咖啡廳開幕",null,null,null,null,"新宿又多了一個吃甜點的理由。\n逛街的熱量交給水果塔。","明天去新宿的人可以收藏🍓\n\n11/28開幕，新宿站西口旁，西新宿1-9-1明治安田新宿大樓1F，設46席咖啡座。營業11:00–20:00，內用最後點餐19:30，餐點價格待查。","11/28","純分享｜不投放","https://www.quil-fait-bon.com/pages/shinjuku","https://en.www.quil-fait-bon.com/blogs/news/shinjuku-open-2026",null,null,null,null,null,null,null,null,"日本新店情報","新宿西口｜11:00–20:00"],["11/27","B","趣味分享","gelato pique café APPLE & MOCHA 冬季甜點",null,null,null,null,"把蘋果派捲進可麗餅了？\n冬天的熱量果然很有創意。","蘋果派跟咖啡合體啦🍎\n\n冬季限定蘋果摩卡可麗餅，以烤蘋果冰淇淋、咖啡奶油與酥脆派皮呈現蘋果派口感。每日限量，另有摩卡霜淇淋等品項；供應門市與價格需再核對。","11/27–2027/1/18","純分享｜不投放",null,"https://www.fashion-press.net/news/calendar/from%3Atoday/",null,null,null,null,null,null,null,null,"日本美食情報","每日限量｜官方價格待查"],["11/27","B","情報分享","富士急官方飯店角落生物主題客房",null,null,null,null,"角落生物居然開房間了？\n這次可以名正言順躲在角落。","去日本跟角落生物一起過夜🫣\n\n富士急樂園官方飯店將推出日本首間常設角落生物主題客房，共兩種主題，以過夜聚會及尋找珍珠為靈感。房價、預約方式與完整地址尚待官方核實。","11/28","純分享｜不投放",null,"https://www.fashion-press.net/news/calendar/from%3Aweekend/",null,null,null,null,null,null,null,null,"日本旅遊情報","山梨富士吉田｜房價待查"],["11/26","A","貼文, 動態","三麗鷗棉花糖貓咪新系列","¥440–3,960（待完整核對）",null,"暫無公開報價","已核實登山扣吊飾¥3,630","這隻貓是棉花糖做的吧？\n看起來比我的枕頭還好睡。","這隻貓看起來也太軟了吧😍\n\n三麗鷗棉花糖貓咪換上可愛衣服啦！這次有登山扣娃娃吊飾、毛絨圍巾、托特包和收藏冊。\n11/27 日本指定 Kiddy Land 先行開賣，想把包包變成貓咪的家也太合理了🤣","11/27","暫緩｜確認買手與同業價格","https://www.sanrio.co.jp/news/goods/mn-kiddyland-20261113/",null,null,null,null,null,null,null,null,null,"角色雜貨系列","九間門市先行｜採購待確認"],["11/26","A","動態, 趣味分享","寶可夢 × 藥師窯新年陶瓷擺飾",null,null,null,null,"日本人的招財小物又進化了。\n今年家裡的吉祥物決定是你了。","寶可夢也要陪你過新年啦🫣\n\n這次和日本藥師窯合作，皮卡丘靠著毛辮羊，另一款是兩隻火紅不倒翁排排坐，還附金色屏風！擺在玄關感覺很有過年的氣氛👌🏽\n每款3080日圓，日本今天線上開賣。","11/26線上；11/28門市","趣味分享｜易碎不投放","https://www.pokemon.co.jp/goods/2026/11/261120_go01.html",null,null,null,null,null,null,null,null,null,"趣味分享","陶瓷易碎｜純分享"],["11/26","B","動態","寶可夢 PIKA PIKA Fresh Farm","¥275–16,500","NT$400–4,890（暫估）","NT$1,040／1,545（代表款）","農夫娃娃¥3,850；結草兒¥5,720","寶可夢不打架，改行種田了？\n連皮卡丘都開始認真上班。","皮卡丘居然跑去種田了🤣\n\n這次農場系列不只有草帽皮卡丘，還有可以換衣服的結草兒、地鼠手套、吼吼鯨澆水壺！連泥土都能變成抱枕，搭配樹果娃娃就能在家假裝收成 ==\n日本今天線上開賣，11/28門市登場。","11/26線上；11/28門市","暫緩｜競品低於毛利門檻","https://www.pokemon.co.jp/goods/2026/11/261120_to02.html","https://universe.oneone.com.tw/posts/7482",null,null,null,null,null,null,null,null,"角色雜貨系列","同業價低｜不宜直接開單"],["11/26","S","貼文, 情報分享","吉伊卡哇燒冬季限定口味",null,null,null,null,"吉伊卡哇怎麼連被烤熟都這麼可愛？\n可愛到有點捨不得咬下去。","吉伊卡哇燒又出新口味了😍\n\n小桃楓糖奶油、栗子饅頭甘酒牛奶、海獺焦糖三款陸續登場，每個350日圓！這次還能買冷凍款回家加熱。去千葉幕張玩的朋友可以先查預約，不然看到門口卻吃不到會哭 ==","11/27起","自然情報分享｜不投放","https://www.chiikawa-yaki.com/","https://prtimes.jp/main/html/rd/p/000000026.000157539.html",null,null,null,null,null,null,null,null,"日本美食情報","幕張店｜部分時段需預約"],["11/25","A","動態","Chambre史努比吊飾","¥759","NT$660","暫無公開報價","¥759–1419，按款式","包包上是不是又少了一個吊飾？\n包包還掛得下，問題不大。","包包上再多一隻史努比應該沒關係吧🫣\n\n日本 Chambre 史努比吊飾系列\n小小一隻掛在包包上就很可愛\n平常背比較素的包包也可以搭配👌🏽\n自己留一個、送朋友一個好像也很合理 ^_^","11/25據報","自然限動測試","https://www.shop-shimamura.com/","https://puchipurabu.com/chambre-snoopy/",null,"0.205","NT$100","NT$16","NT$14","NT$285","NT$375","56.9%","角色配件","低價款暫估｜成本待核"],["11/25","A","動態","三麗鷗甜美蕾絲蛋糕系列",null,null,"暫無公開報價","價格待查","三麗鷗這次把自己變成蛋糕了！\n請問可愛的熱量也要算進去嗎？","三麗鷗這次是要開甜點店嗎😍\n\n甜美蕾絲蛋糕系列🎂\n把大家熟悉的角色跟蛋糕、蕾絲元素結合在一起\n喜歡甜甜的夢幻風格應該會很難選 >\u003c\n\n日本預計11/27推出，完整款式待公布確認。","11/27據報","價格待查｜暫不投放","https://www.sanrio.co.jp/news/goods/goods-release-202611-week5/?id=i1",null,null,null,null,null,null,null,null,null,"角色IP","單品與成本待核"],["11/25","A","動態","Chambre布丁狗櫻桃珍珠吊飾","¥1,419","NT$820","暫無公開報價","¥1419待核","布丁狗也開始走珍珠千金風了？\n誰說狗狗不能當千金小姐？","布丁狗今天走千金路線🍒\n\n日本 Chambre 布丁狗櫻桃珍珠吊飾\n這次櫻桃跟珍珠的搭配真的很可愛😍\n不是只有角色本身，連吊飾的裝飾都很有趣\n掛在簡單的包包上就很有存在感！","11/21據報","自然測試｜有詢單再評估","https://www.shop-shimamura.com/","https://character-note.com/archives/26307",null,"0.205","NT$100","NT$29","NT$21","NT$441","NT$379","46.2%","角色吊飾","庫存與成本待核"],["11/25","A","貼文","GRANIPH × JOJO 聯名系列","¥1,200–17,000","NT$590–4,990","NT$2,275 長夾／2,765 針織（系列部分款）","依先前18款試算；系列與價格待核","JOJO粉絲的冬季穿搭有解了？\n替身使者冬天也是會冷的。","JOJO粉絲看過來～～～\nGRANIPH 最新聯名一次推出黃金之風、石之海各9款🇯🇵\n從替身集合T恤到針織衫、長襪、肩背包跟長夾都有！\n米斯達針織衫胸口還有替身刺繡，白蛇長夾附替身DISC卡片🤫\n全系列共18款，庫存及尺寸待確認。","11/17據報","供貨待查｜暫不投放","GRANIPH 官方系列","https://img.inside-games.jp/article/2026/11/11/190716.html",null,null,null,null,null,null,null,null,"完整聯名系列","系列及價格待核"],["11/25","A","貼文, 情報分享","KITH×Star Wars The Sith",null,null,null,"價格待查","KITH這次加入黑暗面。\n今天的穿搭不需要原力，只需要一點黑暗。","KITH這次加入黑暗面了🤫\n\nKITH × Star Wars The Sith\n把星際大戰反派主題帶進街頭服飾的聯名系列\n日本據報11/25推出🇯🇵\n喜歡星際大戰或街頭品牌的朋友可以留意官方系列情報！\n日本販售渠道及完整品項待確認。","11/25據報","自然情報分享","https://kith.com/","https://uptodate.tokyo/",null,null,null,null,null,null,null,null,"聯名服飾","潮流分享｜供貨待查"],["11/25","A","貼文, 情報分享","Starbucks STAND by BEAMS 第五彈",null,null,null,"價格待查","星巴克這次不只是賣咖啡。\n今天不點咖啡，想點一套穿搭。","星巴克又不務正業了🤣\n\nStarbucks STAND by BEAMS EXTRA Collection 第五彈\n日本據報11/27推出🇯🇵\n咖啡品牌跟日本生活風格品牌的聯名，光是組合就很值得期待\n喜歡 BEAMS 的朋友可以先記下日期！\n完整商品及販售方式待確認。","11/27據報","自然分享｜暫不投放","https://www.beams.co.jp/","https://uptodate.tokyo/",null,null,null,null,null,null,null,null,"聯名","聯名情報｜販售待查"],["11/25","B","動態, 趣味分享","mofusand開運達摩貓娃娃",null,null,null,"景品無一般定價","貓咪先幫你招財了？\n財運先不說，可愛是一定有的。","年底了先讓貓咪幫忙招財一下 ^_^\n\nmofusand 開運達摩貓娃娃🐱\n把貓咪跟日本達摩結合在一起也太可愛 >\u003c\n據報11月下旬推出，是遊樂場景品，不是一般店面販售的商品哦！\n近期要去日本玩的朋友可以留意官方景品資訊。","11月下旬據報","趣味分享｜不投放","https://www.parade-inc.net/search-by-month",null,null,null,null,null,null,null,null,null,"趣味景品","趣味景品｜不開單"],["11/25","S","貼文, 動態, 建議廣告","吉伊卡哇診所娃娃吊飾","¥1,650","NT$880","NT$530–620","¥1650–1980，按款式","吉伊卡哇居然開診所了？\n醫生，我的症狀是看到可愛的就想買。","醫生～～～我需要一點吉伊卡哇🩺\n\n吉伊卡哇診所系列娃娃吊飾\n這次居然是診所主題 ==\n平常都是牠們在療癒我們，現在直接開診所了🤣\n掛在包包上每天帶著出門也太可愛！\n\n日本預計11/27發售🇯🇵","11/27據報","條件式推薦｜$150–300（暫緩）","https://chiikawamarket.jp/","https://torecabiyori.com/chiikawa/",null,"0.205","NT$100","NT$34","NT$24","NT$496","NT$384","43.7%","角色吊飾","低價款暫估｜成本待核"],["11/25","S","貼文, 動態","Miffy×靴下屋毛絨襪","¥1,870","NT$750","暫無公開報價","¥1870待核","襪子上怎麼長滿了毛茸茸的小狗？\n今天出門遛狗，不用牽繩。","襪子上怎麼有小狗啦🤣\n\nMiffy × 日本靴下屋聯名毛絨襪🧦\n這次的小狗是立體毛絨設計\n搭配球鞋露出一點襪口就很可愛\n冬天穿搭的小細節真的很重要👌🏽\n拿來送喜歡米菲的朋友也很可以！","11/25據報","自然測試｜暫不投放","https://tabio.com/blogs/features/miffy2026",null,null,"0.205","NT$100","NT$38","NT$26","NT$548","NT$202","27.0%","服飾配件","款式與成本待核"]],"reports":[[["更新日期","2026-11-27","來源","Metricool / Instagram / Threads","時區","Asia/Taipei"],["（11/26）帳號概況"],["平台","粉絲數","帳號觀看／瀏覽","帳號觸及","新增限動","新增貼文","新增 Reels","貼文瀏覽","貼文互動"],["Instagram","1,259","404","96","8","0","0","—","—"],[null,"11/25 有效紀錄","11/26","11/26","11/26","11/26","11/26","尚無資料","尚無資料"],["Threads","463","3,249","—","—","—","—","228","5"],["首次同步，非單日新增","11/26","11/26","尚無資料","尚無資料","尚無資料","尚無資料","11/27 未完結","11/27 未完結"],["IG 粉絲數備註","11/25 最新非零紀錄；11/26 回傳 0，待確認"],["建議發文時間","21:00 ｜ 20–22 時；每週更新"],[],["IG × Threads 同商品比較"],["商品","IG 發布","Threads 發布","IG 瀏覽","Threads 瀏覽","IG 按讚","Threads 按讚","分析"],["蠟筆小新桑拿服","11/22","11/27","250","228","2","5","Threads 已達 IG 瀏覽的 91.2%，按讚 2.5 倍；觀察期不同，不判定最終勝負。"],["卡西法萬年曆","尚未配對","11/25","尚無資料","4215","尚無資料","86","Threads 表現突出；未取得對應 IG 貼文。"]],[["每週營運分析"],["週期","每週一；待首次分析"],["期間","粉絲變化","觸及","互動","熱門商品","最佳發文時間","策略建議"],["11/20–26（初步）","待確認","931","51","哆啦A夢 Reels","21:00","測試留言引導與晚間發布"],[],["已知觀看","4,594","觸及日值合計","931","最新粉絲數","1,259"],["資料覆蓋","觀看與觸及僅 11/22–26 有值；觸及合計不是跨日去重人數。"],["內容觀察","11/24 觀看 1,883，為已知五日最高；同期哆啦A夢 Reels 發布。"],["下一步","追蹤同類商品的 24h／72h／7d 成效，並比較收藏、分享與留言。"]],[["每月營運報告"],["週期","每月1日；待首次分析"],["月份","粉絲成長","觸及","互動","受眾輪廓","內容策略"],["11/01–26（未完月）","待確認","931","123","尚無人口統計","優先測試角色商品及 Reels"],[],["已知觀看","4,594","觸及日值合計","931","最新粉絲數","1,259"],["資料覆蓋","觀看與觸及僅 11/22–26 有值；觸及合計不是跨日去重人數。"],["內容觀察","已回傳內容互動合計 123 次；其中 11/24 為 46 次，不能視為完整月報。"],["下一步","追蹤同類商品的 24h／72h／7d 成效，並比較收藏、分享與留言。"]]],"syncedAt":"2026-11-27T12:55:21.206Z"};
+const isPublic = false;
+const origin='https://offline.invalid';
+function show(){
+  const path=location.hash.slice(1);
+  const url=new URL(path.startsWith('/')?origin+path:origin);
+  const html=page(data,url,isPublic).replaceAll('href="/','href="#/');
+  const result=new DOMParser().parseFromString(html,'text/html');
+  document.title=result.title;
+  document.body.className=result.body.className;
+  document.body.replaceChildren(...result.body.childNodes);
+  const productUrl=url.searchParams.get('url');
+  if(url.pathname==='/quote'&&productUrl){
+    const form=document.querySelector('#product-lookup');
+    form.querySelector('input').value=productUrl;
+    if(location.origin==='http://127.0.0.1:18754')lookupQuote(form);
+  }
+  document.querySelector('footer .note').textContent=document.querySelector('footer .note').textContent.replace('資料同步','資料截至');
+}
+document.addEventListener('submit',event=>{
+  if(event.target.id==='product-lookup'){event.preventDefault();lookupQuote(event.target);return;}
+  if(event.target.id==='quote-calculator'){event.preventDefault();renderQuote();return;}
+  if(!event.target.matches('.filters'))return;
+  event.preventDefault();
+  location.hash='/?'+new URLSearchParams(new FormData(event.target));
+});
+document.addEventListener('change',event=>{
+  if(event.target.id==='product-offer'){
+    document.querySelector('#product-price').value=event.target.value;
+    renderQuote();
+  }
+  if(event.target.id==='quote-category'){
+    if(event.target.value!=='')applyQuoteCategory(Number(event.target.value));
+    renderQuote();
+  }
+});
+window.addEventListener('hashchange',()=>{show();window.scrollTo(0,0)});
+if(location.hash)show();
+</script></body></html>
