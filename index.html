@@ -338,18 +338,26 @@ function parseProduct(html) {
   }
   const categoryText=title+' '+products.map(p=>[p.category].flat().join(' ')).join(' ');
   const category=quoteCategory(categoryText);
-  return {title,category,options:[...options.values()]};
+  return {title,category,options:[...options.values()],isProduct:products.length>0||meta('og:type')?.toLowerCase()==='product'};
 }
 function chiikawaProduct(url) {
   if(!['chiikawamarket.jp','www.chiikawamarket.jp'].includes(url.hostname)||url.port)return null;
   return url.pathname.match(/^(?:\/collections\/[\w%-]+)?\/products\/([a-z0-9][a-z0-9-]{0,127})\/?$/i)?.[1]?.toLowerCase()??null;
 }
+const quoteCatalog={"www.daytona-park.com":"/item/[0-9]+","zozo.jp":"/shop/[a-z0-9_-]+/goods(?:-sale)?/[0-9]+","converse-tokyo.jp":"/item/[a-z0-9_/-]+","www.isseymiyake.com":"(?:/ja|/en)?/products/[a-z0-9_-]+","www.viviennewestwood-tokyo.com":"/(?:f/dsg|item)/[a-z0-9_.-]+","wtaps.com":"/(?:products|collections/[a-z0-9_-]+/products)/[a-z0-9_-]+","kithtokyo.com":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","windandsea.jp":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","shop-jp.doverstreetmarket.com":"(?:/en|/ja)?/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","www.pokemoncenter-online.com":"/(?:item/)?[0-9]{8,14}\\.html","www.donguri-sora.com":"/(?:category/[a-z0-9_-]+|item)/[a-z0-9_-]+\\.html","www.palcloset.jp":"/display/item/[a-z0-9_-]+","shop.sanrio.co.jp":"/(?:item/detail|products)/[a-z0-9_-]+","www.ec-store.net":"/sws/g/g[a-z0-9_-]+","www.felissimo.co.jp":"/(?:youmore/)?[0-9]{6}\\.html","camshop.jp":"/products/[a-z0-9_-]+","www.beams.co.jp":"/item/[a-z0-9_-]+/[a-z0-9_-]+/[0-9]+","goldy.jp":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","clesste.com":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","www.neweracap.jp":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","www.plazastyle.com":"/(?:ec/)?(?:item|products)/[a-z0-9_./-]+","www.seesee.jp":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","store.goslowcaravan.com":"/(?:c/[a-z0-9_-]+/)*[a-z0-9_-]+/[a-z0-9_-]+","www.maryquant.co.jp":"/(?:products|item)/[a-z0-9_-]+"};
+function catalogProduct(url) {
+  if(url.port)return null;
+  const host=[url.hostname,'www.'+url.hostname].find(name=>Object.hasOwn(quoteCatalog,name));
+  const path=url.pathname.replace(/\/$/,'');
+  return host&&path.length<=190&&new RegExp('^(?:'+quoteCatalog[host]+')$','i').test(path)?host+path:null;
+}
 async function readQuoteProduct(url, signal) {
   const disneyId=url.hostname==='store.disney.co.jp'&&!url.port?url.pathname.match(/^\/goods\/(\d{13})\.html$/)?.[1]:null;
   const dreamPath=!url.port&&['dreampocket-webshop.jp','www.dreampocket-webshop.jp'].includes(url.hostname)&&/^\/c(?:\/[a-z0-9_-]+){1,8}\/?$/i.test(url.pathname)?url.pathname.replace(/\/$/,''):null;
   const graniphPath=!url.port&&['graniph.com','www.graniph.com'].includes(url.hostname)&&/^\/item-detail(?:\/[a-z0-9_-]+){1,4}\/?$/i.test(url.pathname)?url.pathname.replace(/\/$/,''):null;
-  const store=disneyId?'disney':dreamPath?'dreampocket':graniphPath?'graniph':'chiikawa';
-  const productId=disneyId??dreamPath??graniphPath??chiikawaProduct(url);
+  const catalog=catalogProduct(url);
+  const store=disneyId?'disney':dreamPath?'dreampocket':graniphPath?'graniph':catalog?'catalog':'chiikawa';
+  const productId=disneyId??dreamPath??graniphPath??catalog??chiikawaProduct(url);
   const variant=url.searchParams.get('variant');
   try{
     const source=quoteEndpoint&&productId?new URL(quoteEndpoint):url;
@@ -364,13 +372,14 @@ async function readQuoteProduct(url, signal) {
     if(store!=='chiikawa'&&source!==url&&payload.html&&payload.store!==store)throw new Error('請更新商品取價部署版本。');
     if(!payload.html)throw new Error(payload.error||'商店未回傳價格資料。');
     const product=parseProduct(payload.html);
+    if(store==='catalog'&&!product.isProduct)throw new Error('請貼上單一商品詳細頁的網址。');
     if(!product.options.length&&Array.isArray(payload.prices)){
       const prices=[...new Set(payload.prices.filter(n=>Number.isSafeInteger(n)&&n>0))];
       if(prices.length===1)product.options.push({price:prices[0],name:'官網日幣售價'});
       if(prices.length>1)throw new Error('官網顯示多種價格，請核對款式後手動填入日幣售價。');
     }
     if(!product.options.length)throw new Error('找不到明確的日幣售價。');
-    if(variant&&product.options.length>1)throw new Error('請在原商品頁核對指定款式的日幣售價。');
+    if(variant&&(store==='catalog'||product.options.length>1))throw new Error('請在原商品頁核對指定款式的日幣售價。');
     return product;
   }catch(error){
     if(disneyId==='4550586452787'&&!variant&&(!signal.aborted||signal.reason?.name==='TimeoutError')){
@@ -610,6 +619,7 @@ document.addEventListener('change',event=>{
 window.addEventListener('hashchange',()=>{show();window.scrollTo(0,0)});
 show();
 </script></body></html>
+
 
 
 
