@@ -51,7 +51,9 @@ body{font-size:15px}.wrap{width:min(1380px,100% - 80px)}.top{background:var(--wh
 }.sourcing-add-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px}@media(max-width:620px){.sourcing-add-fields{grid-template-columns:1fr}}
 .menu-toggle,.social-label,.menu-close-icon{display:none}
 @media(max-width:780px){
-  .top .wrap{position:relative;min-height:56px;flex-wrap:nowrap}
+  .top .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);min-height:64px;padding-top:8px}
+  .top .brand{grid-column:2;justify-self:center}
+  .top .menu-toggle{grid-column:3;justify-self:end}
   .menu-toggle{display:grid;place-items:center;width:44px;height:44px;padding:0;background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:12px;cursor:pointer}
   .menu-toggle[aria-expanded="true"] .menu-open-icon{display:none}
   .menu-toggle[aria-expanded="true"] .menu-close-icon{display:block}
