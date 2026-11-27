@@ -261,7 +261,7 @@ function trendReport(periods, tab, recommendations) {
 }
 
 const shippingClasses=[['吊飾',80],['小型配件',80],['一般衣服',100],['一般娃娃／玩偶',150],['衛衣／大學踢',150],['大娃娃',200],['厚外套／大件商品',350],['特大商品',450],['其他',null]];
-const quoteEndpoint='';
+const quoteEndpoint='https://script.google.com/macros/s/AKfycbx2kxJL1hC9s2NOf-h1SJzc6Oz8Z8NwDm_u2O0yPgN7FTJ-I4-ZQCuOVBRkmrR1PZA6kg/exec';
 function quotePage() {
   return `<header class="mast"><h1>快速報價</h1></header><section class="report quote-panel">
   <form id="product-lookup" novalidate><label for="product-url">商品網址</label><div class="quote-lookup"><input id="product-url" type="text" inputmode="url" required placeholder="貼上日本商店的商品頁網址"><button>讀取商品</button></div>
