@@ -346,21 +346,29 @@ function chiikawaProduct(url) {
 }
 async function readQuoteProduct(url, signal) {
   const disneyId=url.hostname==='store.disney.co.jp'&&!url.port?url.pathname.match(/^\/goods\/(\d{13})\.html$/)?.[1]:null;
-  const productId=disneyId??chiikawaProduct(url);
+  const dreamPath=!url.port&&['dreampocket-webshop.jp','www.dreampocket-webshop.jp'].includes(url.hostname)&&/^\/c(?:\/[a-z0-9_-]+){1,8}\/?$/i.test(url.pathname)?url.pathname.replace(/\/$/,''):null;
+  const graniphPath=!url.port&&['graniph.com','www.graniph.com'].includes(url.hostname)&&/^\/item-detail(?:\/[a-z0-9_-]+){1,4}\/?$/i.test(url.pathname)?url.pathname.replace(/\/$/,''):null;
+  const store=disneyId?'disney':dreamPath?'dreampocket':graniphPath?'graniph':'chiikawa';
+  const productId=disneyId??dreamPath??graniphPath??chiikawaProduct(url);
   const variant=url.searchParams.get('variant');
   try{
     const source=quoteEndpoint&&productId?new URL(quoteEndpoint):url;
     if(source!==url){
       source.searchParams.set('product',productId);
-      if(disneyId)source.searchParams.set('store','disney');
+      if(store!=='chiikawa')source.searchParams.set('store',store);
       if(variant)source.searchParams.set('variant',variant);
     }
     const response=await fetch(source.href,{mode:'cors',credentials:'omit',referrerPolicy:'no-referrer',signal});
     if(!response.ok)throw new Error('商店回傳錯誤（'+response.status+'）');
     const payload=source===url?{html:await response.text()}:await response.json();
-    if(disneyId&&source!==url&&payload.html&&payload.store!=='disney')throw new Error('請更新商品取價部署版本。');
+    if(store!=='chiikawa'&&source!==url&&payload.html&&payload.store!==store)throw new Error('請更新商品取價部署版本。');
     if(!payload.html)throw new Error(payload.error||'商店未回傳價格資料。');
     const product=parseProduct(payload.html);
+    if(!product.options.length&&Array.isArray(payload.prices)){
+      const prices=[...new Set(payload.prices.filter(n=>Number.isSafeInteger(n)&&n>0))];
+      if(prices.length===1)product.options.push({price:prices[0],name:'官網日幣售價'});
+      if(prices.length>1)throw new Error('官網顯示多種價格，請核對款式後手動填入日幣售價。');
+    }
     if(!product.options.length)throw new Error('找不到明確的日幣售價。');
     if(variant&&product.options.length>1)throw new Error('請在原商品頁核對指定款式的日幣售價。');
     return product;
