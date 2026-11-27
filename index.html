@@ -345,24 +345,30 @@ function chiikawaProduct(url) {
   return url.pathname.match(/^(?:\/collections\/[\w%-]+)?\/products\/([a-z0-9][a-z0-9-]{0,127})\/?$/i)?.[1]?.toLowerCase()??null;
 }
 async function readQuoteProduct(url, signal) {
-  const productId=chiikawaProduct(url);
+  const disneyId=url.hostname==='store.disney.co.jp'&&!url.port?url.pathname.match(/^\/goods\/(\d{13})\.html$/)?.[1]:null;
+  const productId=disneyId??chiikawaProduct(url);
   const variant=url.searchParams.get('variant');
   try{
     const source=quoteEndpoint&&productId?new URL(quoteEndpoint):url;
     if(source!==url){
       source.searchParams.set('product',productId);
+      if(disneyId)source.searchParams.set('store','disney');
       if(variant)source.searchParams.set('variant',variant);
     }
     const response=await fetch(source.href,{mode:'cors',credentials:'omit',referrerPolicy:'no-referrer',signal});
     if(!response.ok)throw new Error('商店回傳錯誤（'+response.status+'）');
     const payload=source===url?{html:await response.text()}:await response.json();
+    if(disneyId&&source!==url&&payload.html&&payload.store!=='disney')throw new Error('請更新商品取價部署版本。');
     if(!payload.html)throw new Error(payload.error||'商店未回傳價格資料。');
     const product=parseProduct(payload.html);
     if(!product.options.length)throw new Error('找不到明確的日幣售價。');
     if(variant&&product.options.length>1)throw new Error('請在原商品頁核對指定款式的日幣售價。');
     return product;
   }catch(error){
-    if(productId==='4571609408758-01'&&!variant&&!url.searchParams.has('selling_plan')&&(!signal.aborted||signal.reason?.name==='TimeoutError')){
+    if(disneyId==='4550586452787'&&!variant&&(!signal.aborted||signal.reason?.name==='TimeoutError')){
+      return {title:'史迪奇玩偶 WHITE WINTER 2026',category:3,options:[{price:5200,name:'日幣售價'}],priceNote:'使用 11/27 日本迪士尼官網核對價（含稅），報價前請再確認售價'};
+    }
+    if(!disneyId&&productId==='4571609408758-01'&&!variant&&!url.searchParams.has('selling_plan')&&(!signal.aborted||signal.reason?.name==='TimeoutError')){
       return {title:'吉伊卡哇診所系列・護士海獺玩偶',category:3,options:[{price:1980,name:'日幣售價'}],priceNote:'使用 11/27 官網核對價（含稅），報價前請再確認售價'};
     }
     throw error;
