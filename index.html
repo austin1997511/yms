@@ -112,7 +112,7 @@ body{font-size:15px}.wrap{width:min(1380px,100% - 80px)}.top{background:var(--wh
 .stock-brand{font-weight:650;margin-bottom:2px}.stock-panel article{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-top:1px solid var(--line)}.stock-count{display:flex;align-items:center;gap:8px}.stock-count button{width:44px;height:44px;padding:0;touch-action:manipulation}.stock-panel form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:8px;padding:12px 0}.stock-panel label{display:grid;gap:4px}.stock-panel input{min-width:0;width:100%;font-size:16px;padding:8px}.stock-panel form button{align-self:end}
 /* Keep motion on opacity and transform so it does not drive layout while scrolling. */
 @media (prefers-reduced-motion: no-preference){
-  .dashboard-enter{animation:dashboard-enter 240ms cubic-bezier(.2,.75,.25,1) both}
+  .dashboard-enter{animation:dashboard-enter 140ms ease-out both}
   details.item[open]>.details, details.report-disclosure[open]>:not(summary),
   details.sourcing-add[open]>:not(summary), .stock-panel details[open]>form{
     animation:dashboard-reveal 190ms cubic-bezier(.2,.75,.25,1) both
@@ -121,8 +121,8 @@ body{font-size:15px}.wrap{width:min(1380px,100% - 80px)}.top{background:var(--wh
     transition:background-color 150ms ease,border-color 150ms ease,color 150ms ease
   }
   @keyframes dashboard-enter{
-    from{opacity:.55;transform:translateY(7px)}
-    to{opacity:1;transform:translateY(0)}
+    from{opacity:.8}
+    to{opacity:1}
   }
   @keyframes dashboard-reveal{
     from{opacity:.55;transform:translateY(-3px)}
