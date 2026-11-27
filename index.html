@@ -181,6 +181,14 @@ body{font-size:15px}.wrap{width:min(1380px,100% - 80px)}.top{background:var(--wh
   .stock-access #stock-connect{width:100%;white-space:normal}
   .stock-panel:has(#stock-list:not(:empty)) #stock-connect{width:auto}
 }
+
+.pinned-picks{margin-bottom:16px}
+#pick-pin-status{margin:8px 0 0}
+#pick-pin-status:empty{margin:0}
+.item .pick-pin{margin:5px 0 0;padding:4px 10px;min-height:32px;border:1px solid var(--line);border-radius:8px;background:var(--white);color:var(--accent);font-size:12px;font-weight:650;cursor:pointer;touch-action:manipulation}
+.item .pick-pin:hover,.item .pick-pin:active{background:var(--blue-soft)}
+.item .pick-pin[data-pick-action="done"]{color:var(--ink)}
+@media(max-width:780px){.item .pick-pin{min-height:36px}}
 </style></head><body class=""><header class="top"><div class="wrap"><a class="brand" href="#/" aria-label="yms 每日選品"><svg width="49" height="23" viewBox="0 0 203 95" aria-hidden="true" focusable="false" fill="currentColor"><path d="M10 0c9-1 13 3 11 12L12 61c-7 5-13 1-12-6L10 0zm31 6c2-6 8-7 14-6L36 91c-1 4-8 4-13 4L41 6zM73 0c8 0 13 3 11 11L74 62c-7 3-13-2-11-9L73 0zm32 0c8 0 12 3 10 11l-9 51c-7 3-13-2-11-9L105 0zm32 0c7 0 12 4 10 11l-9 51c-8 3-13-2-11-9L137 0zm53 0c-9 2-14 12-16 32-7 1-12-3-11-11l2-11c1-7 11-10 25-10zm2 31c9 0 12 5 11 12-1 15-8 21-27 20 12-6 14-18 16-32z"/></svg></a><button class="menu-toggle" type="button" aria-label="主選單" aria-expanded="false" aria-controls="dashboard-navigation"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path class="menu-open-icon" d="M4 6h16M4 12h16M4 18h16"/><path class="menu-close-icon" d="m6 6 12 12M18 6 6 18"/></svg></button><nav id="dashboard-navigation" class="nav" aria-label="主選單"><a href="#/" aria-current="page">每日選品</a><a href="#/sourcing">商品開發</a><a href="#/reports" >營運分析</a><a href="#/stock">現貨清單</a><a href="https://docs.google.com/forms/d/e/1FAIpQLSdXxziBcvHtsAv1YeU5m-jwCLlsYHwsxv8RzhewvHcKN2o_2Q/viewform" target="_blank" rel="noopener noreferrer">報帳</a><a href="#/quote">快速報價 (Beta)</a><div class="social-links"><a href="https://www.instagram.com/yeemian.select/" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><svg class="social-logo ig-logo" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="white" stroke-width="1.7"/><circle cx="12" cy="12" r="3.8" fill="none" stroke="white" stroke-width="1.7"/><circle cx="16.8" cy="7.5" r="1" fill="white"/></svg><span class="social-label" aria-hidden="true">Instagram</span></a><a href="https://www.threads.com/@yeemian.select" aria-label="Threads" title="Threads" target="_blank" rel="noopener noreferrer"><svg class="social-logo threads-logo" viewBox="0 0 671 671" aria-hidden="true"><rect width="671" height="671" fill="#030303"/><path fill="#fff" fill-rule="evenodd" d="M550 244l-36 9q-4 1-5-3C488 171 422 127 340 127c-110 0-179 78-179 209s68 208 179 208c83 0 148-45 148-111 0-32-16-52-37-67-3-2-3 1-4 4-13 62-52 99-105 99-54 0-100-35-100-84 0-56 48-87 111-87 16 0 33 1 45 2 4 0 6-1 5-5-8-31-27-49-63-49-24 0-42 9-55 24q-2 3-5 1l-30-20q-4-3-1-7c23-29 55-43 91-43 62 0 104 37 110 112l2 2c47 22 80 62 80 118 0 91-83 155-192 155-138 0-223-102-223-252C117 183 205 83 340 83c103 0 183 58 211 155q2 5-1 6zM405 352q1-5-4-6c-17-3-31-4-47-4-41 0-69 15-69 43 0 23 25 39 57 39 34 0 57-26 63-72z"/></svg><span class="social-label" aria-hidden="true">Threads</span></a><a href="https://ysesst92013975.shoplineapp.com" aria-label="購物官網" title="購物官網" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l1 13H4L5 8Z"/><path d="M9 9V6a3 3 0 1 1 6 0v3"/></svg><span class="social-label" aria-hidden="true">購物官網</span></a></div></nav></div></header><main class="wrap"><header class="mast picks-mast"><h1>每日選品</h1><p class="subtitle">日本新品、聯名與生活情報</p></header>
   <section class="overview" aria-label="選品概況">
     <div class="kpi"><h2>選品批次</h2><strong>11/28</strong><small>目前檢視日期</small></div>
@@ -208,9 +216,46 @@ const link = (url, label) => /^https:\/\//i.test(url ?? '') ? '<a href="'+escape
 const noCache = {'cache-control':'private, no-store','x-content-type-options':'nosniff'};
 const json = (body, status=200) => Response.json(body,{status,headers:noCache});
 
-function rowMarkup(r, labels, isPublic) {
+
+const pendingPickStorage='yms.pending-picks.v1';
+const pendingPickKey=row=>JSON.stringify([row[0],row[3]]);
+function pendingPicks(){
+  try{
+    const rows=JSON.parse(localStorage.getItem(pendingPickStorage)||'[]');
+    return Array.isArray(rows)?rows.filter(row=>Array.isArray(row)&&row[0]&&row[3]):[];
+  }catch{return [];}
+}
+function pendingMarkup(pins,rows,labels){
+  const latest=new Map(rows.map(row=>[pendingPickKey(row),row]));
+  return pins.length?pins.map(row=>rowMarkup(latest.get(pendingPickKey(row))??row,labels,false,true)).join(''):'<p class="meta">還沒有待發布的商品。可從下方清單釘選。</p>';
+}
+document.addEventListener('click',event=>{
+  const button=event.target.closest('[data-pick-action]');
+  if(!button)return;
+  event.preventDefault();
+  const [labels,...rows]=data.picks;
+  const key=button.dataset.pickKey;
+  const pins=pendingPicks().filter(row=>pendingPickKey(row)!==key);
+  const done=button.dataset.pickAction==='done';
+  const row=rows.find(row=>pendingPickKey(row)===key);
+  if(!done&&!row)return;
+  if(!done)pins.unshift(row);
+  const status=document.querySelector('#pick-pin-status');
+  try{localStorage.setItem(pendingPickStorage,JSON.stringify(pins))}
+  catch{status.textContent='無法儲存釘選，請確認瀏覽器的網站儲存設定。';return}
+  document.querySelector('#pinned-pick-list').innerHTML=pendingMarkup(pins,rows,labels);
+  for(const control of document.querySelectorAll('.pick-catalog [data-pick-action]')){
+    if(control.dataset.pickKey!==key)continue;
+    control.dataset.pickAction=done?'add':'done';
+    control.textContent=done?'釘選':'已發布';
+    if(done&&!button.isConnected)control.focus({preventScroll:true});
+  }
+  if(!button.isConnected&&!document.activeElement?.matches('[data-pick-action]'))status.focus({preventScroll:true});
+  status.textContent=done?'已移出待發布清單。':'已加入待發布清單。';
+});
+function rowMarkup(r, labels, isPublic, pinned=false) {
   const valueClass = value => !value || ['—','-','未提供'].includes(String(value).trim()) ? 'value value-empty' : 'value';
-  return `<details class="item"><summary><div><span class="priority" data-priority="${escape(r[1])}">${escape(r[1])}</span> <span class="meta">${escape(r[0])}</span></div><div><h2>${escape(r[3]).replaceAll("&#39;","’")}</h2><p class="meta">${[r[22],r[2]].filter(Boolean).map(escape).join(' ／ ')}</p></div><div class="${valueClass(r[10])}" data-label="發售">${shown(r[10])}</div><div class="${valueClass(r[5])}" data-label="建議售價">${shown(r[5])}${isPublic?'<span class="toggle">商品詳情</span>':''}</div>${isPublic?'':`<div class="${valueClass(r[20])}" data-label="毛利">${shown(r[20])}<span class="toggle">商品詳情</span></div>`}</summary><div class="details">${(isPublic?[4]:detailFields).filter(i=>r[i]).map(i=>`<dl class="${[4,6,19,20,21].includes(i)?'detail-short':[8,9].includes(i)?'detail-copy':''}${i===9?' line-copy':''}"><dt>${escape(labels[i])}</dt><dd>${i===9?escape(r[i]):shown(r[i])}</dd></dl>`).join('')}<nav aria-label="商品來源">${link(r[12],'官方來源')}${isPublic?'':link(r[13],'情報來源')}</nav></div></details>`;
+  return `<details class="item"><summary><div><span class="priority" data-priority="${escape(r[1])}">${escape(r[1])}</span> <span class="meta">${escape(r[0])}</span></div><div><h2>${escape(r[3]).replaceAll("&#39;","’")}</h2><p class="meta">${[r[22],r[2]].filter(Boolean).map(escape).join(' ／ ')}</p>${isPublic?'':`<button type="button" class="pick-pin" data-pick-key="${escape(pendingPickKey(r))}" data-pick-action="${pinned?'done':'add'}">${pinned?'已發布':'釘選'}</button>`}</div><div class="${valueClass(r[10])}" data-label="發售">${shown(r[10])}</div><div class="${valueClass(r[5])}" data-label="建議售價">${shown(r[5])}${isPublic?'<span class="toggle">商品詳情</span>':''}</div>${isPublic?'':`<div class="${valueClass(r[20])}" data-label="毛利">${shown(r[20])}<span class="toggle">商品詳情</span></div>`}</summary><div class="details">${(isPublic?[4]:detailFields).filter(i=>r[i]).map(i=>`<dl class="${[4,6,19,20,21].includes(i)?'detail-short':[8,9].includes(i)?'detail-copy':''}${i===9?' line-copy':''}"><dt>${escape(labels[i])}</dt><dd>${i===9?escape(r[i]):shown(r[i])}</dd></dl>`).join('')}<nav aria-label="商品來源">${link(r[12],'官方來源')}${isPublic?'':link(r[13],'情報來源')}</nav></div></details>`;
 }
 
 function selection(values, params, isPublic) {
@@ -226,6 +271,8 @@ function selection(values, params, isPublic) {
   const option=(key,label,selected)=>`<option value="${escape(key)}" ${selected===key?'selected':''}>${escape(label)}</option>`;
   const counts=['S','A','B'].map(k=>visible.filter(r=>r[1]===k).length);
   const sellable=visible.filter(r=>r[5]).length;
+  const pins=isPublic?[]:pendingPicks();
+  const pinnedKeys=new Set(pins.map(pendingPickKey));
   return `<header class="mast picks-mast"><h1>每日選品</h1><p class="subtitle">日本新品、聯名與生活情報</p></header>
   <section class="overview" aria-label="選品概況">
     <div class="kpi"><h2>選品批次</h2><strong>${escape(date==='all'?dates[0]:date)||'未提供'}</strong><small>${date==='all'?'最新批次':'目前檢視日期'}</small></div>
@@ -233,9 +280,10 @@ function selection(values, params, isPublic) {
     <div class="kpi"><h2>已有建議售價</h2><strong>${sellable}</strong><small>筆選品</small></div>
     <div class="distribution"><h2>優先等級分布</h2><div class="segments" aria-hidden="true">${counts.map(n=>`<div class="seg" style="--n:${n}"></div>`).join('')}</div><div class="legend">${['S','A','B'].map((k,i)=>`<span>${k} <b>${counts[i]}</b></span>`).join('')}</div></div>
   </section>
-  <section class="ledger"><h2>選品清單</h2>
+  ${isPublic?'':`<section class="ledger pinned-picks" aria-labelledby="pinned-title"><h2 id="pinned-title">釘選商品</h2><div id="pinned-pick-list">${pendingMarkup(pins,entries,labels)}</div><p id="pick-pin-status" class="meta" role="status" tabindex="-1"></p></section>`}
+  <section class="ledger pick-catalog"><h2>選品清單</h2>
   <form class="filters" action="/"><label class="search">商品搜尋<input type="search" name="q" maxlength="100" value="${escape(query)}" placeholder="輸入商品、類別或發布方式"></label><label>批次日期<select name="date">${dates.map(d=>option(d,d,date)).join('')}${option('all','所有批次',date)}</select></label><label>優先等級<select name="priority">${option('','全部',priority)}${priorities.map(v=>option(v,v,priority)).join('')}</select></label><button>套用篩選</button><a href="/">清除</a></form>
-  ${visible.length?`<div class="register-head"><span>優先／日期</span><span>商品</span><span>發售</span><span>建議售價</span>${isPublic?'':'<span>毛利</span>'}</div>${visible.map(r=>rowMarkup(r,labels,isPublic)).join('')}`:'<p class="empty">這個篩選沒有符合的選品。</p>'}</section>`;
+  ${visible.length?`<div class="register-head"><span>優先／日期</span><span>商品</span><span>發售</span><span>建議售價</span>${isPublic?'':'<span>毛利</span>'}</div>${visible.map(r=>rowMarkup(r,labels,isPublic,pinnedKeys.has(pendingPickKey(r)))).join('')}`:'<p class="empty">這個篩選沒有符合的選品。</p>'}</section>`;
 }
 
 function table(rows) {
