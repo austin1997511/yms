@@ -1090,11 +1090,8 @@ async function stockRequest(path, options={}){
   if(!response.ok)throw Error('Google Sheets 連線失敗，請重新載入庫存。');
   return response.json();
 }
-function stockBrand(name,brand){
-  if(typeof brand==='string'&&brand.trim())return brand.trim();
-  if(/^Goyard/i.test(name))return 'Goyard';
-  if(/^Vivienne Westwood/i.test(name)||['浮雕包','彩釦餃子包','立體星球項鍊','立體星球耳環','立體星球手鍊','珍珠頸鍊','樹幹包'].includes(name))return 'Vivienne Westwood';
-  return '品牌待確認';
+function stockBrand(brand){
+  return typeof brand==='string'&&brand.trim()?brand.trim():'無品牌';
 }
 async function stockRows(){
   const {tab,range}=await stockSheet();
@@ -1109,7 +1106,7 @@ async function stockRows(){
       if(rows[i])rows[i][col]=rows[start]?.[col];
     }
   }
-  return rows.slice(1).map((row,i)=>({index:i+2,name:String(row[0]??'').trim(),brand:stockBrand(String(row[0]??'').trim(),rows[0]?.[7]==='品牌'?row[7]:null),size:String(row[1]??'').trim(),color:String(row[2]??'').trim(),price:typeof row[4]==='number'?row[4]:null,quantity:row[5]||0})).filter(row=>row.name);
+  return rows.slice(1).map((row,i)=>({index:i+2,name:String(row[0]??'').trim(),brand:stockBrand(rows[0]?.[7]?.trim?.()==='品牌'?row[7]:null),size:String(row[1]??'').trim(),color:String(row[2]??'').trim(),price:typeof row[4]==='number'?row[4]:null,quantity:row[5]||0})).filter(row=>row.name);
 }
 function renderStock(rows){
   const list=document.querySelector('#stock-list');
@@ -1121,13 +1118,13 @@ function renderStock(rows){
   const groups=new Map();
   for(const row of rows){
     if(!Number.isSafeInteger(row.quantity)||row.quantity<1)continue;
-    const brand=row.brand||'品牌待確認';
+    const brand=row.brand||'無品牌';
     if(!groups.has(brand))groups.set(brand,[]);
     groups.get(brand).push(row);
   }
   if(!groups.size)list.insertAdjacentHTML('beforeend','<p>目前沒有現貨。</p>');
   const collator=new Intl.Collator('zh-TW',{numeric:true});
-  const brands=[...groups.keys()].sort((a,b)=>a==='品牌待確認'?1:b==='品牌待確認'?-1:collator.compare(a,b));
+  const brands=[...groups.keys()].sort((a,b)=>a==='無品牌'?1:b==='無品牌'?-1:collator.compare(a,b));
   for(const brand of brands){
     const products=groups.get(brand);
     const total=products.reduce((sum,row)=>sum+row.quantity,0);
