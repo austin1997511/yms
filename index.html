@@ -269,10 +269,10 @@ function quotePage() {
   <div class="quote-image"><label for="quote-image">商品截圖</label><input id="quote-image" type="file" accept="image/png,image/jpeg,image/webp,image/bmp"><p id="quote-image-status" class="chart-caption" role="status">也可在這頁直接貼上截圖。請保留商品名稱和日幣價格。</p></div>
   <form id="quote-calculator"><div class="quote-fields">
   <label id="offer-field" hidden>商品價格／款式<select id="product-offer"></select></label>
-  <label>商品價格（日圓）<input id="product-price" type="number" min="1" step="1" required placeholder="輸入日幣價格"></label>
+  <label>商品價格（日圓）<input id="product-price" type="number" min="1" step="1" required placeholder="可直接貼上 ¥1,980"></label>
   <label>商品類別<select id="quote-category" required><option value="">請選擇類別</option>${shippingClasses.map(([name],i)=>`<option value="${i}">${name}</option>`).join('')}</select></label>
   <label>集運分攤（NT$）<input id="quote-shipping" type="number" min="0" step="1" required></label>
-  </div><button>計算報價</button></form><div id="quote-result" aria-live="polite"></div></section>`;
+  </div><p id="quote-price-status" class="chart-caption" role="status"></p><button>計算報價</button></form><div id="quote-result" aria-live="polite"></div></section>`;
 }
 
 function calculateQuote(yen, category, shipping) {
@@ -679,11 +679,44 @@ function show(){
   }
   document.querySelector('footer .note').textContent=document.querySelector('footer .note').textContent.replace('資料同步','資料截至');
 }
+function pastedQuotePrice(text) {
+  const raw=text.normalize('NFKC').trim();
+  if(/^(?:[1-9]\d*|[1-9]\d{0,2}(?:,\d{3})+)$/.test(raw)){
+    const value=Number(raw.replaceAll(',',''));
+    return Number.isSafeInteger(value)?value:null;
+  }
+  const prices=imagePriceCandidates(raw);
+  return prices.length===1?prices[0]:null;
+}
+function pasteQuotePrice(event) {
+  const text=event.clipboardData?.getData('text/plain');
+  if(!text)return;
+  event.preventDefault();
+  const status=document.querySelector('#quote-price-status');
+  const value=pastedQuotePrice(text);
+  if(value===null){
+    status.textContent='請只複製一個日幣售價，例如 ¥1,980。';
+    return;
+  }
+  quoteImageRun++;
+  quoteLookup?.abort();
+  quoteLookup=null;
+  document.querySelector('#product-lookup button').disabled=false;
+  const select=document.querySelector('#product-offer');
+  select.replaceChildren();
+  select.parentElement.hidden=true;
+  event.target.value=value;
+  const valid=document.querySelector('#quote-calculator').checkValidity();
+  status.textContent='已貼上 ¥'+value.toLocaleString('ja-JP')+(valid?'。':'，請選商品類別或補集運費。');
+  renderQuote();
+}
+
 document.addEventListener('paste',event=>{
   if(document.querySelector('#quote-image')){
     const image=Array.from(event.clipboardData?.items??[]).find(item=>item.kind==='file'&&item.type.startsWith('image/'))?.getAsFile();
     if(image){event.preventDefault();readQuoteImage(image);return;}
   }
+  if(event.target.id==='product-price'){pasteQuotePrice(event);return;}
   if(event.target.id!=='product-url')return;
   const form=event.target.form;
   setTimeout(()=>{if(form.isConnected)lookupQuote(form);},0);
