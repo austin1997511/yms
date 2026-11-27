@@ -787,10 +787,16 @@ function sourcingPage(params) {
 
 const stockClientId='552897521549-i37g8m59g91jt9j9hr048pjmauvt68h4.apps.googleusercontent.com';
 const stockBook='1PlQ8s0zY28c-o4B54JfiFSyHayojdgf--7598OxgEYE';
-const stockTab="'英國庫存'";
+const stockSheetId=1875246453;
+async function stockSheet(){
+  const metadata=await stockRequest('?fields=sheets(properties(sheetId,title),merges)');
+  const tab=metadata.sheets?.find(sheet=>sheet.properties?.sheetId===stockSheetId);
+  if(!tab?.properties?.title)throw Error('找不到原本的庫存分頁，請確認分頁仍存在。');
+  return {tab,range:"'"+tab.properties.title.replaceAll("'","''")+"'"};
+}
 let stockToken='', stockClient, stockBusy=false;
 function stockPage(){
-  return '<header class="mast"><h1>現貨清單</h1></header><section class="report stock-panel"><button type="button" id="stock-connect">使用 Google 帳號連線</button><p id="stock-status" role="status">請使用有「英國庫存」權限的帳號。</p><div id="stock-list"></div></section>';
+  return '<header class="mast"><h1>現貨清單</h1></header><section class="report stock-panel"><button type="button" id="stock-connect">使用 Google 帳號連線</button><p id="stock-status" role="status">請使用有「現貨庫存」權限的帳號。</p><div id="stock-list"></div></section>';
 }
 async function stockRequest(path, options={}){
   const response=await fetch('https://sheets.googleapis.com/v4/spreadsheets/'+stockBook+path,{
@@ -807,7 +813,7 @@ async function stockRequest(path, options={}){
       throw Error('Google 尚未授予試算表存取權。請重新連線，並在授權視窗允許試算表權限。');
     }
     if(reason==='RATE_LIMIT_EXCEEDED'||reason==='QUOTA_EXCEEDED')throw Error('Google Sheets API 暫時達到用量限制，請稍後重試。');
-    throw Error('Google Sheets 拒絕存取。請確認登入帳號可以開啟「英國庫存」；修改庫存需要編輯權限。'+(reason?'（'+reason+'）':''));
+    throw Error('Google Sheets 拒絕存取。請確認登入帳號可以開啟「現貨庫存」；修改庫存需要編輯權限。'+(reason?'（'+reason+'）':''));
   }
   if(!response.ok)throw Error('Google Sheets 連線失敗，請重新載入庫存。');
   return response.json();
@@ -819,13 +825,10 @@ function stockBrand(name,brand){
   return '品牌待確認';
 }
 async function stockRows(){
-  const [grid,metadata]=await Promise.all([
-    stockRequest('/values/'+encodeURIComponent(stockTab+'!A1:H')+'?valueRenderOption=UNFORMATTED_VALUE'),
-    stockRequest('?ranges='+encodeURIComponent(stockTab)+'&fields=sheets(properties(sheetId),merges)')
-  ]);
+  const {tab,range}=await stockSheet();
+  const grid=await stockRequest('/values/'+encodeURIComponent(range+'!A1:H')+'?valueRenderOption=UNFORMATTED_VALUE');
   const rows=grid.values||[];
-  const tab=metadata.sheets?.[0];
-  if(tab?.properties?.sheetId!==1875246453||['款式','規格','顏色','成本','yms售價','庫存數量'].some((name,i)=>rows[0]?.[i]!==name))throw Error('庫存表欄位已變更。');
+  if(['款式','規格','顏色','成本','yms售價','庫存數量'].some((name,i)=>rows[0]?.[i]!==name))throw Error('庫存表欄位已變更。');
   for(const merge of tab.merges||[]){
     const col=merge.startColumnIndex??0;
     const start=merge.startRowIndex??0;
@@ -868,8 +871,9 @@ function renderStock(rows){
     list.append(item);
   }
 }
-function writeStock(index,quantity){
-  return stockRequest('/values/'+encodeURIComponent(stockTab+'!F'+index)+'?valueInputOption=RAW',{method:'PUT',body:JSON.stringify({values:[[quantity]]})});
+async function writeStock(index,quantity){
+  const {range}=await stockSheet();
+  return stockRequest('/values/'+encodeURIComponent(range+'!F'+index)+'?valueInputOption=RAW',{method:'PUT',body:JSON.stringify({values:[[quantity]]})});
 }
 async function runStock(action){
   if(stockBusy)return;
@@ -921,7 +925,8 @@ document.addEventListener('submit',event=>{
       return;
     }
     const values=[[...[name,size,color].map(value=>value?"'"+value:''),'',price,quantity,'=INDEX(E:E,ROW())*INDEX(F:F,ROW())']];
-    await stockRequest('/values/'+encodeURIComponent(stockTab+'!A:F')+':append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS',{method:'POST',body:JSON.stringify({values})});
+    const {range}=await stockSheet();
+    await stockRequest('/values/'+encodeURIComponent(range+'!A:F')+':append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS',{method:'POST',body:JSON.stringify({values})});
   });
 });
 function page(snapshot,url,isPublic=false) {
