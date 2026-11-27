@@ -125,7 +125,16 @@ body{font-size:15px}.wrap{width:min(1380px,100% - 80px)}.top{background:var(--wh
   .ledger .item .details nav{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:13px}
   .ledger .item .details nav:empty{display:none}
 }
-.stock-brand{font-weight:650;margin-bottom:2px}.stock-panel article{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-top:1px solid var(--line)}.stock-count{display:flex;align-items:center;gap:8px}.stock-count button{width:44px;height:44px;padding:0;touch-action:manipulation}.stock-panel form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:8px;padding:12px 0}.stock-panel label{display:grid;gap:4px}.stock-panel input{min-width:0;width:100%;font-size:16px;padding:8px}.stock-panel form button{align-self:end}
+.stock-brand{font-weight:650;margin-bottom:2px}.stock-panel article{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-top:1px solid var(--line)}.stock-count{display:flex;align-items:center;gap:2px;flex:none}
+.stock-count button{
+  position:relative;isolation:isolate;display:grid;place-items:center;width:44px;height:44px;
+  padding:0;border:0;border-radius:50%;background:transparent;color:var(--muted);
+  font-size:17px;line-height:1;touch-action:manipulation
+}
+.stock-count button::before{content:"";position:absolute;z-index:-1;inset:7px;border:1px solid var(--line);border-radius:50%}
+.stock-count button:is(:hover,:active){background:transparent;color:var(--accent)}
+.stock-count button:is(:hover,:active)::before{border-color:var(--accent)}
+.stock-quantity{min-width:2ch;color:var(--ink);font-size:24px;font-weight:750;line-height:1;text-align:center;font-variant-numeric:tabular-nums}.stock-panel form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:8px;padding:12px 0}.stock-panel label{display:grid;gap:4px}.stock-panel input{min-width:0;width:100%;font-size:16px;padding:8px}.stock-panel form button{align-self:end}
 /* Keep motion on opacity and transform so it does not drive layout while scrolling. */
 @media (prefers-reduced-motion: no-preference){
   .dashboard-enter{animation:dashboard-enter 140ms ease-out both}
@@ -1100,7 +1109,12 @@ function renderStock(rows){
         });
       };
       count.append(button);
-      if(delta===-1)count.append(String(row.quantity));
+      if(delta===-1){
+        const quantity=document.createElement('strong');
+        quantity.className='stock-quantity';
+        quantity.textContent=String(row.quantity);
+        count.append(quantity);
+      }
     }
     list.append(item);
   }
