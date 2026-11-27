@@ -74,6 +74,40 @@ body{font-size:15px}.wrap{width:min(1380px,100% - 80px)}.top{background:var(--wh
   .ledger .item summary>div:nth-child(n+3)::before{font-size:11px}
   .ledger .item .toggle{font-size:11px}
 }
+
+@media(max-width:780px){
+  .top .menu-toggle{touch-action:manipulation}
+  .ledger .item summary,.public .ledger .item summary{
+    position:relative;display:flex;flex-wrap:wrap;align-items:baseline;
+    gap:5px 12px;padding:13px 26px 13px 0;background:transparent
+  }
+  .ledger .item summary::after{
+    content:"";position:absolute;top:18px;right:5px;width:8px;height:8px;
+    border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg)
+  }
+  .ledger .item[open] summary::after{top:22px;transform:rotate(225deg)}
+  .ledger .item summary>div:first-child{
+    order:-2;flex-basis:100%;display:flex;align-items:center;gap:6px;text-align:left
+  }
+  .ledger .item summary>div:nth-child(2){order:-1;flex-basis:100%}
+  .ledger .item h2{margin:0;font-size:16px}
+  .ledger .item summary .value{color:var(--ink);font-size:12px}
+  .ledger .item summary>.value:nth-child(n+3)::before{
+    display:inline;margin-right:4px;font-size:11px;font-weight:500
+  }
+  .ledger .item summary .value-empty,.ledger .item .toggle{display:none}
+  .ledger .item .details{
+    grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 14px;
+    margin:0 0 12px;padding:12px;border:1px solid var(--line);border-radius:12px
+  }
+  .ledger .item .details dl{grid-column:1/-1;min-width:0;margin:0}
+  .ledger .item .details .detail-short{grid-column:auto}
+  .ledger .item .details dt{font-size:11px;font-weight:650}
+  .ledger .item .details dd{margin:3px 0 0;font-size:14px;line-height:1.55;overflow-wrap:anywhere}
+  .ledger .item .details .detail-copy{border-top:1px solid var(--line);padding-top:9px}
+  .ledger .item .details nav{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:13px}
+  .ledger .item .details nav:empty{display:none}
+}
 </style></head><body class=""><header class="top"><div class="wrap"><a class="brand" href="#/" aria-label="yms 每日選品"><svg width="49" height="23" viewBox="0 0 203 95" aria-hidden="true" focusable="false" fill="currentColor"><path d="M10 0c9-1 13 3 11 12L12 61c-7 5-13 1-12-6L10 0zm31 6c2-6 8-7 14-6L36 91c-1 4-8 4-13 4L41 6zM73 0c8 0 13 3 11 11L74 62c-7 3-13-2-11-9L73 0zm32 0c8 0 12 3 10 11l-9 51c-7 3-13-2-11-9L105 0zm32 0c7 0 12 4 10 11l-9 51c-8 3-13-2-11-9L137 0zm53 0c-9 2-14 12-16 32-7 1-12-3-11-11l2-11c1-7 11-10 25-10zm2 31c9 0 12 5 11 12-1 15-8 21-27 20 12-6 14-18 16-32z"/></svg></a><button class="menu-toggle" type="button" aria-label="主選單" aria-expanded="false" aria-controls="dashboard-navigation"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path class="menu-open-icon" d="M4 6h16M4 12h16M4 18h16"/><path class="menu-close-icon" d="m6 6 12 12M18 6 6 18"/></svg></button><nav id="dashboard-navigation" class="nav" aria-label="主選單"><a href="#/" aria-current="page">每日選品</a><a href="#/sourcing">商品開發</a><a href="#/reports" >營運分析</a><a href="https://docs.google.com/forms/d/e/1FAIpQLSdXxziBcvHtsAv1YeU5m-jwCLlsYHwsxv8RzhewvHcKN2o_2Q/viewform" target="_blank" rel="noopener noreferrer">報帳</a><a href="#/quote">快速報價 (Beta)</a><div class="social-links"><a href="https://www.instagram.com/yeemian.select/" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><svg class="social-logo ig-logo" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="white" stroke-width="1.7"/><circle cx="12" cy="12" r="3.8" fill="none" stroke="white" stroke-width="1.7"/><circle cx="16.8" cy="7.5" r="1" fill="white"/></svg><span class="social-label" aria-hidden="true">Instagram</span></a><a href="https://www.threads.com/@yeemian.select" aria-label="Threads" title="Threads" target="_blank" rel="noopener noreferrer"><svg class="social-logo threads-logo" viewBox="0 0 671 671" aria-hidden="true"><rect width="671" height="671" fill="#030303"/><path fill="#fff" fill-rule="evenodd" d="M550 244l-36 9q-4 1-5-3C488 171 422 127 340 127c-110 0-179 78-179 209s68 208 179 208c83 0 148-45 148-111 0-32-16-52-37-67-3-2-3 1-4 4-13 62-52 99-105 99-54 0-100-35-100-84 0-56 48-87 111-87 16 0 33 1 45 2 4 0 6-1 5-5-8-31-27-49-63-49-24 0-42 9-55 24q-2 3-5 1l-30-20q-4-3-1-7c23-29 55-43 91-43 62 0 104 37 110 112l2 2c47 22 80 62 80 118 0 91-83 155-192 155-138 0-223-102-223-252C117 183 205 83 340 83c103 0 183 58 211 155q2 5-1 6zM405 352q1-5-4-6c-17-3-31-4-47-4-41 0-69 15-69 43 0 23 25 39 57 39 34 0 57-26 63-72z"/></svg><span class="social-label" aria-hidden="true">Threads</span></a><a href="https://ysesst92013975.shoplineapp.com" aria-label="購物官網" title="購物官網" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l1 13H4L5 8Z"/><path d="M9 9V6a3 3 0 1 1 6 0v3"/></svg><span class="social-label" aria-hidden="true">購物官網</span></a></div></nav></div></header><main class="wrap"><header class="mast picks-mast"><h1>每日選品</h1><p class="subtitle">日本新品、聯名與生活情報</p></header>
   <section class="overview" aria-label="選品概況">
     <div class="kpi"><h2>選品批次</h2><strong>11/27</strong><small>目前檢視日期</small></div>
@@ -114,7 +148,8 @@ const noCache = {'cache-control':'private, no-store','x-content-type-options':'n
 const json = (body, status=200) => Response.json(body,{status,headers:noCache});
 
 function rowMarkup(r, labels, isPublic) {
-  return `<details class="item"><summary><div><span class="priority" data-priority="${escape(r[1])}">${escape(r[1])}</span> <span class="meta">${escape(r[0])}</span></div><div><h2>${escape(r[3]).replaceAll("&#39;","’")}</h2><p class="meta">${[r[22],r[2]].filter(Boolean).map(escape).join(' ／ ')}</p></div><div class="value" data-label="發售">${shown(r[10])}</div><div class="value" data-label="建議售價">${shown(r[5])}${isPublic?'<span class="toggle">商品詳情</span>':''}</div>${isPublic?'':`<div class="value" data-label="毛利">${shown(r[20])}<span class="toggle">商品詳情</span></div>`}</summary><div class="details">${(isPublic?[4]:detailFields).filter(i=>r[i]).map(i=>`<dl${i===9?' class="line-copy"':''}><dt>${escape(labels[i])}</dt><dd>${i===9?escape(r[i]):shown(r[i])}</dd></dl>`).join('')}<nav aria-label="商品來源">${link(r[12],'官方來源')}${isPublic?'':link(r[13],'情報來源')}</nav></div></details>`;
+  const valueClass = value => !value || ['—','-','未提供'].includes(String(value).trim()) ? 'value value-empty' : 'value';
+  return `<details class="item"><summary><div><span class="priority" data-priority="${escape(r[1])}">${escape(r[1])}</span> <span class="meta">${escape(r[0])}</span></div><div><h2>${escape(r[3]).replaceAll("&#39;","’")}</h2><p class="meta">${[r[22],r[2]].filter(Boolean).map(escape).join(' ／ ')}</p></div><div class="${valueClass(r[10])}" data-label="發售">${shown(r[10])}</div><div class="${valueClass(r[5])}" data-label="建議售價">${shown(r[5])}${isPublic?'<span class="toggle">商品詳情</span>':''}</div>${isPublic?'':`<div class="${valueClass(r[20])}" data-label="毛利">${shown(r[20])}<span class="toggle">商品詳情</span></div>`}</summary><div class="details">${(isPublic?[4]:detailFields).filter(i=>r[i]).map(i=>`<dl class="${[4,6,19,20,21].includes(i)?'detail-short':[8,9].includes(i)?'detail-copy':''}${i===9?' line-copy':''}"><dt>${escape(labels[i])}</dt><dd>${i===9?escape(r[i]):shown(r[i])}</dd></dl>`).join('')}<nav aria-label="商品來源">${link(r[12],'官方來源')}${isPublic?'':link(r[13],'情報來源')}</nav></div></details>`;
 }
 
 function selection(values, params, isPublic) {
