@@ -32,8 +32,15 @@ function doGet(e) {
   if (!base) return reply({error: '請貼上支援商店的商品詳細頁。'});
   const url = base + (store === 'chiikawa' && variant ? '?variant=' + variant : '');
   try {
-    const response = UrlFetchApp.fetch(url, {followRedirects: false, muteHttpExceptions: true});
-    if (response.getResponseCode() !== 200) return reply({error: '商店未回傳商品頁。'});
+    const response = fetchShopPage(url, store);
+    const status = response.getResponseCode();
+    if(status!==200){
+      const message=status===404||status===410?'商品頁已找不到，請核對網址或換一個仍在銷售的商品。'
+        :status===403||status===429?'商店拒絕或限制自動取價。'
+        :[301,302,303,307,308].includes(status)?'商店轉址到其他位置，請先開啟商品頁，再複製最終商品網址。'
+        :'商店未回傳可讀取的商品頁。';
+      return reply({error:message+'（HTTP '+status+'）',status});
+    }
     if (response.getContent().length > 3000000) return reply({error: '商品頁超過可讀取大小。'});
     const content = response.getContentText();
     const tags = content.match(/<title\b[^>]*>[\s\S]*?<\/title\s*>|<meta\b[^>]*>|<script\b[^>]*\btype\s*=\s*["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script\s*>/gi) || [];
@@ -55,3 +62,23 @@ function displayedPrices(store, html) {
     .filter(value => Number.isSafeInteger(value) && value > 0))];
 }
 
+
+function fetchShopPage(url, store) {
+  const options={followRedirects:false,muteHttpExceptions:true};
+  let response=UrlFetchApp.fetch(url,options);
+  if(store!=='catalog')return response;
+  const origin=url.match(/^https:\/\/[a-z0-9.-]+/)?.[0];
+  const seen=new Set([url]);
+  for(let i=0;i<2&&[301,302,303,307,308].includes(response.getResponseCode());i++){
+    const headers=response.getAllHeaders();
+    const raw=headers.Location??headers.location;
+    if(typeof raw!=='string'||!origin)break;
+    const path=raw.startsWith(origin+'/')?raw.slice(origin.length):raw;
+    if(!path.startsWith('/')||path.startsWith('//'))break;
+    const next=catalogUrl(origin.slice(8)+path.replace(/\/$/,''));
+    if(!next||seen.has(next))break;
+    seen.add(next);
+    response=UrlFetchApp.fetch(next,options);
+  }
+  return response;
+}
