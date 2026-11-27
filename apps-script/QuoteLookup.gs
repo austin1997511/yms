@@ -1,4 +1,4 @@
-const quoteCatalog={"www.daytona-park.com":"/item/[0-9]+","zozo.jp":"/shop/[a-z0-9_-]+/goods(?:-sale)?/[0-9]+","converse-tokyo.jp":"/item/[a-z0-9_/-]+","www.isseymiyake.com":"(?:/ja|/en)?/products/[a-z0-9_-]+","www.viviennewestwood-tokyo.com":"/(?:f/dsg|item)/[a-z0-9_.-]+","wtaps.com":"/(?:products|collections/[a-z0-9_-]+/products)/[a-z0-9_-]+","kithtokyo.com":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","windandsea.jp":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","shop-jp.doverstreetmarket.com":"(?:/en|/ja)?/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","www.pokemoncenter-online.com":"/(?:item/)?[0-9]{8,14}\\.html","www.donguri-sora.com":"/(?:category/[a-z0-9_-]+|item)/[a-z0-9_-]+\\.html","www.palcloset.jp":"/display/item/[a-z0-9_-]+","shop.sanrio.co.jp":"/(?:item/detail|products)/[a-z0-9_-]+","www.ec-store.net":"/sws/g/g[a-z0-9_-]+","www.felissimo.co.jp":"/(?:youmore/)?[0-9]{6}\\.html","camshop.jp":"/products/[a-z0-9_-]+","www.beams.co.jp":"/item/[a-z0-9_-]+/[a-z0-9_-]+/[0-9]+","goldy.jp":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","clesste.com":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","www.neweracap.jp":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","www.plazastyle.com":"/(?:ec/)?(?:item|products)/[a-z0-9_./-]+","www.seesee.jp":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","store.goslowcaravan.com":"/(?:c/[a-z0-9_-]+/)*[a-z0-9_-]+/[a-z0-9_-]+","www.maryquant.co.jp":"/(?:products|item)/[a-z0-9_-]+"};
+const quoteCatalog={"sanko-bazaar.jp":"/ap/item/i/[a-zA-Z0-9]+","www.daytona-park.com":"/item/[0-9]+","zozo.jp":"/shop/[a-z0-9_-]+/goods(?:-sale)?/[0-9]+","converse-tokyo.jp":"/item/[a-z0-9_/-]+","www.isseymiyake.com":"(?:/ja|/en)?/products/[a-z0-9_-]+","www.viviennewestwood-tokyo.com":"/(?:f/dsg|item)/[a-z0-9_.-]+","wtaps.com":"/(?:products|collections/[a-z0-9_-]+/products)/[a-z0-9_-]+","kithtokyo.com":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","windandsea.jp":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","shop-jp.doverstreetmarket.com":"(?:/en|/ja)?/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","www.pokemoncenter-online.com":"/(?:item/)?[0-9]{8,14}\\.html","www.donguri-sora.com":"/(?:category/[a-z0-9_-]+|item)/[a-z0-9_-]+\\.html","www.palcloset.jp":"/display/item/[a-z0-9_-]+","shop.sanrio.co.jp":"/(?:item/detail|products)/[a-z0-9_-]+","www.ec-store.net":"/sws/g/g[a-z0-9_-]+","www.felissimo.co.jp":"/(?:youmore/)?[0-9]{6}\\.html","camshop.jp":"/products/[a-z0-9_-]+","www.beams.co.jp":"/item/[a-z0-9_-]+/[a-z0-9_-]+/[0-9]+","goldy.jp":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","clesste.com":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","www.neweracap.jp":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","www.plazastyle.com":"/(?:ec/)?(?:item|products)/[a-z0-9_./-]+","www.seesee.jp":"/(?:collections/[a-z0-9_-]+/)?products/[a-z0-9_-]+","store.goslowcaravan.com":"/(?:c/[a-z0-9_-]+/)*[a-z0-9_-]+/[a-z0-9_-]+","www.maryquant.co.jp":"/(?:products|item)/[a-z0-9_-]+"};
 
 function catalogUrl(handle) {
   const parts=handle.match(/^([a-z0-9.-]+)(\/[A-Za-z0-9_./-]+)$/);
@@ -30,7 +30,9 @@ function doGet(e) {
   }
   const base = productUrl(handle);
   if (!base) return reply({error: '請貼上支援商店的商品詳細頁。'});
-  const url = base + (store === 'chiikawa' && variant ? '?variant=' + variant : '');
+  const color = String(e.parameter.colvar || '');
+  if (color && (!base.startsWith('https://sanko-bazaar.jp/ap/item/i/') || !/^[a-zA-Z0-9]{1,12}$/.test(color))) return reply({error:'顏色款式代碼格式錯誤。'});
+  const url = base + (color ? '?colvar=' + color : store === 'chiikawa' && variant ? '?variant=' + variant : '');
   try {
     const response = fetchShopPage(url, store);
     const status = response.getResponseCode();
@@ -66,7 +68,7 @@ function displayedPrices(store, html) {
 function fetchShopPage(url, store) {
   const options={followRedirects:false,muteHttpExceptions:true};
   let response=UrlFetchApp.fetch(url,options);
-  if(store!=='catalog')return response;
+  if(store!=='catalog'||url.includes('?colvar='))return response;
   const origin=url.match(/^https:\/\/[a-z0-9.-]+/)?.[0];
   const seen=new Set([url]);
   for(let i=0;i<2&&[301,302,303,307,308].includes(response.getResponseCode());i++){
