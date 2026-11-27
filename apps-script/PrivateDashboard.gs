@@ -1,9 +1,14 @@
-// Deploy as a separate web app, with access set to Only myself.
+// Deploy as the user accessing the web app. Require a signed-in Google account.
+const YMS_ALLOWED_EMAILS = new Set([
+  'yeemianselect@gmail.com',
+  'chengyuweng1996@gmail.com'
+]);
+
 function doGet() {
-  const visitor = Session.getActiveUser().getEmail();
-  const owner = Session.getEffectiveUser().getEmail();
-  if (!visitor || !owner || visitor.toLowerCase() !== owner.toLowerCase()) {
-    return ymsUnavailable('請使用後台擁有者的 Google 帳號登入。');
+  const visitor = (Session.getActiveUser().getEmail() || '').trim().toLowerCase();
+  const effective = (Session.getEffectiveUser().getEmail() || '').trim().toLowerCase();
+  if (!visitor || visitor !== effective || !YMS_ALLOWED_EMAILS.has(visitor)) {
+    return ymsUnavailable('請使用已獲授權的 Google 帳號登入 yms。');
   }
 
   const token = PropertiesService.getScriptProperties().getProperty('YMS_GITHUB_READ_TOKEN');
