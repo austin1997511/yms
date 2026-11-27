@@ -809,7 +809,18 @@ async function stockRequest(path, options={}){
     ...options,headers:{Authorization:'Bearer '+stockToken,'Content-Type':'application/json'}
   });
   if(response.status===401){ stockToken=''; throw Error('Google 授權已過期，請重新連線。'); }
-  if(response.status===403)throw Error('無法存取庫存。請確認此帳號的試算表權限，以及專案已啟用 Google Sheets API。');
+  if(response.status===403){
+    const payload=await response.json().catch(()=>null);
+    const apiError=payload?.error;
+    const reason=apiError?.details?.find(detail=>detail.reason)?.reason || apiError?.errors?.[0]?.reason;
+    if(['SERVICE_DISABLED','accessNotConfigured'].includes(reason))throw Error('YMS 庫存專案尚未啟用 Google Sheets API。啟用後再按「重新載入庫存」。');
+    if(['ACCESS_TOKEN_SCOPE_INSUFFICIENT','insufficientPermissions'].includes(reason)){
+      stockToken='';
+      throw Error('Google 尚未授予試算表存取權。請重新連線，並在授權視窗允許試算表權限。');
+    }
+    if(reason==='RATE_LIMIT_EXCEEDED'||reason==='QUOTA_EXCEEDED')throw Error('Google Sheets API 暫時達到用量限制，請稍後重試。');
+    throw Error('Google Sheets 拒絕存取。請確認登入帳號可以開啟「英國庫存」；修改庫存需要編輯權限。'+(reason?'（'+reason+'）':''));
+  }
   if(!response.ok)throw Error('Google Sheets 連線失敗，請重新載入庫存。');
   return response.json();
 }
