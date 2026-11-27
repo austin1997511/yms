@@ -929,7 +929,8 @@ function reports(snapshot, params) {
   const currentDay=current.key.slice(4,6)+'/'+current.key.slice(6);
   const fullDaily=tab===0&&isLatest&&storedDay&&storedDay.slice(1).map(part=>part.padStart(2,'0')).join('/')===currentDay;
   const recommendations=advicePanel(current,tab,snapshot);
-  const postAnalysis=tab===0?instagramPostsPanel(comparison?[current,comparison]:[current],snapshot.instagramPosts):'';
+  const postPeriods=comparison?[current,comparison]:params.get('range')?[current]:null;
+  const postAnalysis=tab===0?postPanel('Instagram',postPeriods,snapshot.instagramPosts)+postPanel('Threads',postPeriods,snapshot.threadsPosts):'';
   const body=fullDaily&&!comparison?dailyReport(rows,snapshot.stories,recommendations,postAnalysis):trendReport(comparison?[current,comparison]:[current],tab,recommendations)
     +postAnalysis+(fullDaily?disclosure('當日完整明細',dailyReport(rows,snapshot.stories)):'')
     +(isLatest&&tab!==0&&!comparison&&rows.length?disclosure('原始期間報表',periodReport(rows)):'');
@@ -937,15 +938,26 @@ function reports(snapshot, params) {
 
 }
 
-function instagramPostsPanel(periods,posts){
+function latestPostPeriod(posts,now=new Date()){
+  const today=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit'}).format(now);
+  const yesterday=new Date(today+'T00:00:00Z');
+  yesterday.setUTCDate(yesterday.getUTCDate()-1);
+  const keys=[today,yesterday.toISOString().slice(0,10)].map(date=>date.replaceAll('-',''));
+  const key=keys.find(date=>posts?.[date]?.items?.length)??keys[0];
+  return {key,label:(key===keys[0]?'今日':'昨日')+' '+Number(key.slice(4,6))+'/'+Number(key.slice(6)),automatic:true};
+}
+function postPanel(platform,periods,posts){
+  periods??=[latestPostPeriod(posts)];
   const num=value=>Number.isFinite(value)?value.toLocaleString('zh-TW'):'—';
-  const fields=[['按讚','likes'],['觸及人數','reach'],['分享','shares'],['留言','comments'],['收藏','saves'],['觀看','views']];
-  return `<section class="report ig-post-panel"><div class="report-section-head"><h2>Instagram 貼文分析</h2></div>
+  const fields=platform==='Threads'
+    ?[['瀏覽','views'],['按讚','likes'],['回覆','replies'],['轉發','reposts'],['引用','quotes'],['分享','shares']]
+    :[['按讚','likes'],['觸及人數','reach'],['分享','shares'],['留言','comments'],['收藏','saves'],['觀看','views']];
+  return `<section class="report ig-post-panel"><div class="report-section-head"><h2>${platform} ${platform==='Threads'?'發文':'貼文'}分析</h2></div>
   ${periods.map(period=>{
     const batch=posts?.[period.key];
-    if(!batch?.items?.length)return `${periods.length>1?`<h3>${escape(period.label)}</h3>`:''}<p class="chart-caption">Metricool 尚無這一天的貼文明細。</p>`;
+    if(!batch?.items?.length)return `${periods.length>1?`<h3>${escape(period.label)}</h3>`:''}<p class="chart-caption">${period.automatic?'Metricool 尚未提供今天或昨天的貼文明細。':'Metricool 尚無這一天的貼文明細。'}</p>`;
     const updated=batch.updatedAt?new Intl.DateTimeFormat('zh-TW',{timeZone:'Asia/Taipei',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(batch.updatedAt)):'';
-    return `${periods.length>1?`<h3>${escape(period.label)}</h3>`:''}<p class="chart-caption ig-post-summary">${batch.items.length} 篇 · 發文後累計${updated?' · 擷取於 '+escape(updated):''}</p><div class="report-grid">
+    return `${periods.length>1?`<h3>${escape(period.label)}</h3>`:''}<p class="chart-caption ig-post-summary">${period.automatic?escape(period.label)+' · ':''}${batch.items.length} 篇 · 發文後累計${updated?' · 擷取於 '+escape(updated):''}</p><div class="report-grid">
       ${batch.items.map(post=>`<article class="report product-card"><h3>${escape(post.title)}</h3>
         <dl class="ig-post-metrics">${fields.map(([label,key])=>`<div><dt>${label}</dt><dd>${num(post[key])}</dd></div>`).join('')}</dl>
         ${link(post.url,'查看原貼文')}</article>`).join('')}</div>`;
