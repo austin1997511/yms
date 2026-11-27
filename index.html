@@ -201,7 +201,35 @@ body{font-size:15px}.wrap{width:min(1380px,100% - 80px)}.top{background:var(--wh
 .ig-post-panel .product-card{display:flex;flex-direction:column;align-items:stretch}
 .ig-post-panel .product-card>a{align-self:flex-start;margin-top:auto;color:var(--accent)}
 @media(max-width:780px){.item .pick-title .pick-pin[data-pick-action="add"]{width:40px;min-height:40px}.ig-post-panel .report-grid{gap:12px}}
-</style></head><body class=""><header class="top"><div class="wrap"><a class="brand" href="#/" aria-label="yms 每日選品"><svg width="49" height="23" viewBox="0 0 203 95" aria-hidden="true" focusable="false" fill="currentColor"><path d="M10 0c9-1 13 3 11 12L12 61c-7 5-13 1-12-6L10 0zm31 6c2-6 8-7 14-6L36 91c-1 4-8 4-13 4L41 6zM73 0c8 0 13 3 11 11L74 62c-7 3-13-2-11-9L73 0zm32 0c8 0 12 3 10 11l-9 51c-7 3-13-2-11-9L105 0zm32 0c7 0 12 4 10 11l-9 51c-8 3-13-2-11-9L137 0zm53 0c-9 2-14 12-16 32-7 1-12-3-11-11l2-11c1-7 11-10 25-10zm2 31c9 0 12 5 11 12-1 15-8 21-27 20 12-6 14-18 16-32z"/></svg></a><button class="menu-toggle" type="button" aria-label="主選單" aria-expanded="false" aria-controls="dashboard-navigation"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path class="menu-open-icon" d="M4 6h16M4 12h16M4 18h16"/><path class="menu-close-icon" d="m6 6 12 12M18 6 6 18"/></svg></button><nav id="dashboard-navigation" class="nav" aria-label="主選單"><a href="#/" aria-current="page">每日選品</a><a href="#/sourcing">商品開發</a><a href="#/reports" >營運分析</a><a href="#/stock">現貨清單</a><a href="https://docs.google.com/forms/d/e/1FAIpQLSdXxziBcvHtsAv1YeU5m-jwCLlsYHwsxv8RzhewvHcKN2o_2Q/viewform" target="_blank" rel="noopener noreferrer">報帳</a><a href="#/quote">快速報價 (Beta)</a><div class="social-links"><a href="https://www.instagram.com/yeemian.select/" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><svg class="social-logo ig-logo" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="white" stroke-width="1.7"/><circle cx="12" cy="12" r="3.8" fill="none" stroke="white" stroke-width="1.7"/><circle cx="16.8" cy="7.5" r="1" fill="white"/></svg><span class="social-label" aria-hidden="true">Instagram</span></a><a href="https://www.threads.com/@yeemian.select" aria-label="Threads" title="Threads" target="_blank" rel="noopener noreferrer"><svg class="social-logo threads-logo" viewBox="0 0 671 671" aria-hidden="true"><rect width="671" height="671" fill="#030303"/><path fill="#fff" fill-rule="evenodd" d="M550 244l-36 9q-4 1-5-3C488 171 422 127 340 127c-110 0-179 78-179 209s68 208 179 208c83 0 148-45 148-111 0-32-16-52-37-67-3-2-3 1-4 4-13 62-52 99-105 99-54 0-100-35-100-84 0-56 48-87 111-87 16 0 33 1 45 2 4 0 6-1 5-5-8-31-27-49-63-49-24 0-42 9-55 24q-2 3-5 1l-30-20q-4-3-1-7c23-29 55-43 91-43 62 0 104 37 110 112l2 2c47 22 80 62 80 118 0 91-83 155-192 155-138 0-223-102-223-252C117 183 205 83 340 83c103 0 183 58 211 155q2 5-1 6zM405 352q1-5-4-6c-17-3-31-4-47-4-41 0-69 15-69 43 0 23 25 39 57 39 34 0 57-26 63-72z"/></svg><span class="social-label" aria-hidden="true">Threads</span></a><a href="https://ysesst92013975.shoplineapp.com" aria-label="購物官網" title="購物官網" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l1 13H4L5 8Z"/><path d="M9 9V6a3 3 0 1 1 6 0v3"/></svg><span class="social-label" aria-hidden="true">購物官網</span></a></div></nav></div></header><main class="wrap"><header class="mast picks-mast"><h1>每日選品</h1><p class="subtitle">日本新品、聯名與生活情報</p></header>
+
+.todo-panel{margin-bottom:14px}
+.todo-panel h2{margin:0 0 12px;font-size:19px}
+#todo-form{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:12px 16px}
+.todo-field,#todo-form legend{font-size:13px;font-weight:650;color:var(--muted)}
+.todo-field{display:grid;gap:6px}
+.todo-field input,.todo-field textarea{width:100%;min-width:0;min-height:44px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:var(--white);color:var(--ink);font:inherit;font-size:16px}
+.todo-field textarea{resize:vertical}
+#todo-form fieldset{margin:0;padding:0;border:0;min-width:0}
+.todo-assignees{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.todo-assignees label{position:relative;cursor:pointer}
+.todo-assignees input{position:absolute;width:1px;height:1px;opacity:0}
+.todo-assignees label>span{min-height:44px;display:flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid var(--line);border-radius:9px}
+.todo-assignees input:checked+span{border-color:var(--accent);background:var(--blue-soft)}
+.todo-assignees input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.todo-owner{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;font-size:13px;font-weight:750}
+.todo-owner[data-owner="H"]{color:#07655c;background:#d7f2ec}
+.todo-owner[data-owner="W"]{color:#644098;background:#efe4fa}
+#todo-form>button{justify-self:start;min-height:44px}
+#todo-status{margin:0}#todo-status:not(:empty){margin-top:10px}
+.todo-list{list-style:none;margin:0;padding:0}
+.todo-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:start;padding:12px 0;border-top:1px solid var(--line)}
+.todo-copy{overflow-wrap:anywhere}.todo-copy p{margin:4px 0;white-space:pre-wrap;color:var(--muted)}
+.todo-copy a{display:inline-block;margin-top:5px;color:var(--accent);font-size:13px}
+.todo-row .todo-done{padding:6px 10px;min-height:36px;border:1px solid var(--line);background:var(--white);color:var(--accent);font-size:13px}
+.todo-row .todo-done:hover{background:var(--blue-soft)}
+#todo-completed{margin-top:10px}
+@media(max-width:640px){#todo-form{grid-template-columns:minmax(0,1fr)}.todo-row .todo-done{min-height:44px}}
+</style></head><body class=""><header class="top"><div class="wrap"><a class="brand" href="#/" aria-label="yms 每日選品"><svg width="49" height="23" viewBox="0 0 203 95" aria-hidden="true" focusable="false" fill="currentColor"><path d="M10 0c9-1 13 3 11 12L12 61c-7 5-13 1-12-6L10 0zm31 6c2-6 8-7 14-6L36 91c-1 4-8 4-13 4L41 6zM73 0c8 0 13 3 11 11L74 62c-7 3-13-2-11-9L73 0zm32 0c8 0 12 3 10 11l-9 51c-7 3-13-2-11-9L105 0zm32 0c7 0 12 4 10 11l-9 51c-8 3-13-2-11-9L137 0zm53 0c-9 2-14 12-16 32-7 1-12-3-11-11l2-11c1-7 11-10 25-10zm2 31c9 0 12 5 11 12-1 15-8 21-27 20 12-6 14-18 16-32z"/></svg></a><button class="menu-toggle" type="button" aria-label="主選單" aria-expanded="false" aria-controls="dashboard-navigation"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path class="menu-open-icon" d="M4 6h16M4 12h16M4 18h16"/><path class="menu-close-icon" d="m6 6 12 12M18 6 6 18"/></svg></button><nav id="dashboard-navigation" class="nav" aria-label="主選單"><a href="#/" aria-current="page">每日選品</a><a href="#/sourcing">商品開發</a><a href="#/reports" >營運分析</a><a href="#/stock">現貨清單</a><a href="#/todo">待辦事項</a><a href="https://docs.google.com/forms/d/e/1FAIpQLSdXxziBcvHtsAv1YeU5m-jwCLlsYHwsxv8RzhewvHcKN2o_2Q/viewform" target="_blank" rel="noopener noreferrer">報帳</a><a href="#/quote">快速報價 (Beta)</a><div class="social-links"><a href="https://www.instagram.com/yeemian.select/" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><svg class="social-logo ig-logo" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5" fill="none" stroke="white" stroke-width="1.7"/><circle cx="12" cy="12" r="3.8" fill="none" stroke="white" stroke-width="1.7"/><circle cx="16.8" cy="7.5" r="1" fill="white"/></svg><span class="social-label" aria-hidden="true">Instagram</span></a><a href="https://www.threads.com/@yeemian.select" aria-label="Threads" title="Threads" target="_blank" rel="noopener noreferrer"><svg class="social-logo threads-logo" viewBox="0 0 671 671" aria-hidden="true"><rect width="671" height="671" fill="#030303"/><path fill="#fff" fill-rule="evenodd" d="M550 244l-36 9q-4 1-5-3C488 171 422 127 340 127c-110 0-179 78-179 209s68 208 179 208c83 0 148-45 148-111 0-32-16-52-37-67-3-2-3 1-4 4-13 62-52 99-105 99-54 0-100-35-100-84 0-56 48-87 111-87 16 0 33 1 45 2 4 0 6-1 5-5-8-31-27-49-63-49-24 0-42 9-55 24q-2 3-5 1l-30-20q-4-3-1-7c23-29 55-43 91-43 62 0 104 37 110 112l2 2c47 22 80 62 80 118 0 91-83 155-192 155-138 0-223-102-223-252C117 183 205 83 340 83c103 0 183 58 211 155q2 5-1 6zM405 352q1-5-4-6c-17-3-31-4-47-4-41 0-69 15-69 43 0 23 25 39 57 39 34 0 57-26 63-72z"/></svg><span class="social-label" aria-hidden="true">Threads</span></a><a href="https://ysesst92013975.shoplineapp.com" aria-label="購物官網" title="購物官網" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l1 13H4L5 8Z"/><path d="M9 9V6a3 3 0 1 1 6 0v3"/></svg><span class="social-label" aria-hidden="true">購物官網</span></a></div></nav></div></header><main class="wrap"><header class="mast picks-mast"><h1>每日選品</h1><p class="subtitle">日本新品、聯名與生活情報</p></header>
   <section class="overview" aria-label="選品概況">
     <div class="kpi"><h2>選品批次</h2><strong>11/28</strong><small>目前檢視日期</small></div>
     <div class="kpi"><h2>符合篩選</h2><strong>6</strong><small>筆選品與情報</small></div>
@@ -1093,13 +1121,82 @@ document.addEventListener('submit',event=>{
     await stockRequest('/values/'+encodeURIComponent(range+'!A:F')+':append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS',{method:'POST',body:JSON.stringify({values})});
   });
 });
+
+const todoStorageKey='yms.todos.v1';
+const todoOwners={H:'黃',W:'翁'};
+function readTodos(){
+  const rows=JSON.parse(localStorage.getItem(todoStorageKey)||'[]');
+  if(!Array.isArray(rows))throw Error('無法讀取待辦事項。');
+  return rows;
+}
+function todoRows(rows,completed){
+  const visible=rows.filter(row=>Boolean(row.done)===completed);
+  return visible.length?visible.map(row=>`<li class="todo-row">
+    <span class="todo-owner" data-owner="${escape(row.owner)}" aria-label="負責人：${escape(todoOwners[row.owner])}">${escape(row.owner)}</span>
+    <div class="todo-copy"><strong>${escape(row.title)}</strong>
+      ${row.note?`<p>${escape(row.note)}</p>`:''}${row.href?link(row.href,'開啟連結'):''}</div>
+    ${completed?'':`<button type="button" class="todo-done" data-todo-done="${escape(row.id)}" aria-label="完成：${escape(row.title)}">已完成</button>`}
+  </li>`).join(''):`<li class="meta">${completed?'尚無已完成事項。':'目前沒有待辦事項。'}</li>`;
+}
+function todoPage(){
+  let rows;
+  try{rows=readTodos()}catch{return '<header class="mast"><h1>待辦事項</h1></header><p role="status">無法讀取此瀏覽器的待辦事項。</p>';}
+  return `<header class="mast"><h1>待辦事項</h1></header>
+  <section class="report todo-panel" aria-labelledby="todo-add-title">
+    <h2 id="todo-add-title">新增待辦</h2>
+    <form id="todo-form">
+      <label class="todo-field">待辦事項<input name="title" maxlength="120" required></label>
+      <fieldset><legend>指派給</legend><div class="todo-assignees">${Object.entries(todoOwners).map(([code,name])=>`<label><input type="radio" name="owner" value="${code}" required><span><b class="todo-owner" data-owner="${code}">${code}</b> ${name}</span></label>`).join('')}</div></fieldset>
+      <label class="todo-field">備註<textarea name="note" rows="3" maxlength="2000"></textarea></label>
+      <label class="todo-field">連結<input name="href" type="url" inputmode="url" placeholder="https://" maxlength="2000"></label>
+      <button type="submit">新增待辦</button>
+    </form>
+    <p id="todo-status" class="meta" role="status" tabindex="-1"></p>
+  </section>
+  <section class="report todo-panel"><h2>待處理</h2><ul id="todo-active" class="todo-list">${todoRows(rows,false)}</ul></section>
+  <details class="report report-disclosure todo-panel"><summary>已完成 <span id="todo-done-count">${rows.filter(row=>row.done).length}</span></summary><ul id="todo-completed" class="todo-list">${todoRows(rows,true)}</ul></details>`;
+}
+function writeTodos(rows){
+  localStorage.setItem(todoStorageKey,JSON.stringify(rows));
+  document.querySelector('#todo-active').innerHTML=todoRows(rows,false);
+  document.querySelector('#todo-completed').innerHTML=todoRows(rows,true);
+  document.querySelector('#todo-done-count').textContent=rows.filter(row=>row.done).length;
+}
+document.addEventListener('submit',event=>{
+  if(event.target.id!=='todo-form')return;
+  event.preventDefault();
+  const status=document.querySelector('#todo-status');
+  const input=new FormData(event.target);
+  const [title,owner,note,href]=['title','owner','note','href'].map(key=>String(input.get(key)??'').trim());
+  if(!title||!Object.hasOwn(todoOwners,owner)){status.textContent='請填寫待辦事項並選擇負責人。';return;}
+  if(href){
+    try{if(!['https:','http:'].includes(new URL(href).protocol))throw Error()}
+    catch{status.textContent='請輸入以 https:// 或 http:// 開頭的連結。';return;}
+  }
+  try{
+    writeTodos([{id:crypto.randomUUID(),title,owner,note,href,done:false},...readTodos()]);
+    event.target.reset();
+    status.textContent='已新增待辦。';
+  }catch{status.textContent='無法儲存待辦，請確認瀏覽器允許網站儲存資料。';}
+});
+document.addEventListener('click',event=>{
+  const button=event.target.closest('[data-todo-done]');
+  if(!button)return;
+  const status=document.querySelector('#todo-status');
+  try{
+    writeTodos(readTodos().map(row=>row.id===button.dataset.todoDone?{...row,done:true}:row));
+    status.textContent='已移至完成區。';
+    status.focus({preventScroll:true});
+  }catch{status.textContent='無法儲存完成狀態。';}
+});
 function page(snapshot,url,isPublic=false) {
+  const todo=!isPublic&&url.pathname==='/todo';
   const stock=!isPublic&&url.pathname==='/stock';
   const sourcing=!isPublic&&url.pathname==='/sourcing';
   const quote=!isPublic&&url.pathname==='/quote';
   const report=!isPublic&&url.pathname==='/reports';
   const updated=snapshot?new Intl.DateTimeFormat('zh-TW',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Taipei',hour12:false}).format(new Date(!quote&&!report&&!sourcing&&!stock?(snapshot.picksSyncedAt??snapshot.syncedAt):snapshot.syncedAt)):'等待首次同步';
-  return `<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="yms 的日本選品與營運工作站"><meta name="robots" content="noindex,nofollow"><title>${stock?'現貨清單':sourcing?'商品開發':quote?'快速報價':report?'營運分析':'每日選品'}｜yms</title><style>${css}</style></head><body class="${isPublic?'public':''}"><header class="top"><div class="wrap"><a class="brand" href="/" aria-label="yms 每日選品"><svg width="49" height="23" viewBox="0 0 203 95" aria-hidden="true" focusable="false" fill="currentColor"><path d="M10 0c9-1 13 3 11 12L12 61c-7 5-13 1-12-6L10 0zm31 6c2-6 8-7 14-6L36 91c-1 4-8 4-13 4L41 6zM73 0c8 0 13 3 11 11L74 62c-7 3-13-2-11-9L73 0zm32 0c8 0 12 3 10 11l-9 51c-7 3-13-2-11-9L105 0zm32 0c7 0 12 4 10 11l-9 51c-8 3-13-2-11-9L137 0zm53 0c-9 2-14 12-16 32-7 1-12-3-11-11l2-11c1-7 11-10 25-10zm2 31c9 0 12 5 11 12-1 15-8 21-27 20 12-6 14-18 16-32z"/></svg></a><button class="menu-toggle" type="button" aria-label="主選單" aria-expanded="false" aria-controls="dashboard-navigation"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path class="menu-open-icon" d="M4 6h16M4 12h16M4 18h16"/><path class="menu-close-icon" d="m6 6 12 12M18 6 6 18"/></svg></button><nav id="dashboard-navigation" class="nav" aria-label="主選單"><a href="/" ${report||quote||sourcing||stock?'':'aria-current="page"'}>每日選品</a>${isPublic?'':`<a href="/sourcing" ${sourcing?'aria-current="page"':''}>商品開發</a><a href="/reports" ${report?'aria-current="page"':''}>營運分析</a><a href="/stock" ${stock?'aria-current="page"':''}>現貨清單</a><a href="https://docs.google.com/forms/d/e/1FAIpQLSdXxziBcvHtsAv1YeU5m-jwCLlsYHwsxv8RzhewvHcKN2o_2Q/viewform" target="_blank" rel="noopener noreferrer">報帳</a><a href="/quote" ${quote?'aria-current="page"':''}>快速報價 (Beta)</a>`}${socialLinks()}</nav></div></header><main class="wrap">${stock?stockPage():snapshot?(sourcing?sourcingPage(url.searchParams):quote?quotePage():report?reports(snapshot,url.searchParams):selection(snapshot.picks,url.searchParams,isPublic)):'<div class="empty"><h1>每日選品</h1><p>目前無法載入選品資料。</p></div>'}<footer><span class="note">資料同步 ${escape(updated)}（台北時間）</span>${isPublic||sourcing?'':report?'<span class="note">營運數據來源 Metricool</span>':link(sheet,'開啟原始試算表')}</footer></main></body></html>`;
+  return `<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="yms 的日本選品與營運工作站"><meta name="robots" content="noindex,nofollow"><title>${todo?'待辦事項':stock?'現貨清單':sourcing?'商品開發':quote?'快速報價':report?'營運分析':'每日選品'}｜yms</title><style>${css}</style></head><body class="${isPublic?'public':''}"><header class="top"><div class="wrap"><a class="brand" href="/" aria-label="yms 每日選品"><svg width="49" height="23" viewBox="0 0 203 95" aria-hidden="true" focusable="false" fill="currentColor"><path d="M10 0c9-1 13 3 11 12L12 61c-7 5-13 1-12-6L10 0zm31 6c2-6 8-7 14-6L36 91c-1 4-8 4-13 4L41 6zM73 0c8 0 13 3 11 11L74 62c-7 3-13-2-11-9L73 0zm32 0c8 0 12 3 10 11l-9 51c-7 3-13-2-11-9L105 0zm32 0c7 0 12 4 10 11l-9 51c-8 3-13-2-11-9L137 0zm53 0c-9 2-14 12-16 32-7 1-12-3-11-11l2-11c1-7 11-10 25-10zm2 31c9 0 12 5 11 12-1 15-8 21-27 20 12-6 14-18 16-32z"/></svg></a><button class="menu-toggle" type="button" aria-label="主選單" aria-expanded="false" aria-controls="dashboard-navigation"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path class="menu-open-icon" d="M4 6h16M4 12h16M4 18h16"/><path class="menu-close-icon" d="m6 6 12 12M18 6 6 18"/></svg></button><nav id="dashboard-navigation" class="nav" aria-label="主選單"><a href="/" ${report||quote||sourcing||stock||todo?'':'aria-current="page"'}>每日選品</a>${isPublic?'':`<a href="/sourcing" ${sourcing?'aria-current="page"':''}>商品開發</a><a href="/reports" ${report?'aria-current="page"':''}>營運分析</a><a href="/stock" ${stock?'aria-current="page"':''}>現貨清單</a><a href="/todo" ${todo?'aria-current="page"':''}>待辦事項</a><a href="https://docs.google.com/forms/d/e/1FAIpQLSdXxziBcvHtsAv1YeU5m-jwCLlsYHwsxv8RzhewvHcKN2o_2Q/viewform" target="_blank" rel="noopener noreferrer">報帳</a><a href="/quote" ${quote?'aria-current="page"':''}>快速報價 (Beta)</a>`}${socialLinks()}</nav></div></header><main class="wrap">${todo?todoPage():stock?stockPage():snapshot?(sourcing?sourcingPage(url.searchParams):quote?quotePage():report?reports(snapshot,url.searchParams):selection(snapshot.picks,url.searchParams,isPublic)):'<div class="empty"><h1>每日選品</h1><p>目前無法載入選品資料。</p></div>'}<footer><span class="note">${todo?'待辦事項儲存在此瀏覽器':`資料同步 ${escape(updated)}（台北時間）`}</span>${isPublic||sourcing||todo?'':report?'<span class="note">營運數據來源 Metricool</span>':link(sheet,'開啟原始試算表')}</footer></main></body></html>`;
 }
 
 
