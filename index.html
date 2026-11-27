@@ -76,7 +76,8 @@ body{font-size:15px}.wrap{width:min(1380px,100% - 80px)}.top{background:var(--wh
 }
 
 @media(max-width:780px){
-  .top .menu-toggle{touch-action:manipulation}
+  .top .menu-toggle{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+  .top .menu-toggle:hover,.top .menu-toggle:active,.top .menu-toggle[aria-expanded="true"]{background:transparent;color:var(--ink)}
   .ledger .item summary,.public .ledger .item summary{
     position:relative;display:flex;flex-wrap:wrap;align-items:baseline;
     gap:5px 12px;padding:13px 26px 13px 0;background:transparent
