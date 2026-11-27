@@ -260,7 +260,8 @@ function trendReport(periods, tab, recommendations) {
   ${tab===0?'':disclosure('逐日數據',periods.map(period=>`<h3>${period.label}</h3>${table([['日期','Instagram 觀看','Instagram 觸及','Threads 瀏覽'],...period.days.map(day=>[day.slice(4,6)+'/'+day.slice(6),...platforms.flatMap(([, ,metrics])=>metrics.map(([,get])=>valueFor(get,day)??'—'))])])}`).join(''))}`;
 }
 
-const shippingClasses=[['吊飾／小物',100],['服飾／一般商品',150],['大型或厚重商品',200]];
+const shippingClasses=[['吊飾',80],['小型配件',80],['一般衣服',100],['一般娃娃／玩偶',150],['衛衣／大學踢',150],['大娃娃',200],['厚外套／大件商品',350],['特大商品',450],['其他',null]];
+const quoteEndpoint='';
 function quotePage() {
   return `<header class="mast"><h1>快速報價</h1></header><section class="report quote-panel">
   <form id="product-lookup" novalidate><label for="product-url">商品網址</label><div class="quote-lookup"><input id="product-url" type="text" inputmode="url" required placeholder="貼上日本商店的商品頁網址"><button>讀取商品</button></div>
@@ -269,7 +270,7 @@ function quotePage() {
   <label id="offer-field" hidden>商品價格／款式<select id="product-offer"></select></label>
   <label>商品價格（日圓）<input id="product-price" type="number" min="1" step="1" required placeholder="輸入日幣價格"></label>
   <label>商品類別<select id="quote-category" required><option value="">請選擇類別</option>${shippingClasses.map(([name],i)=>`<option value="${i}">${name}</option>`).join('')}</select></label>
-  <label>集運分攤（NT$）<input id="quote-shipping" type="number" value="100" min="0" step="1" required></label>
+  <label>集運分攤（NT$）<input id="quote-shipping" type="number" min="0" step="1" required></label>
   </div><button>計算報價</button></form><div id="quote-result" aria-live="polite"></div></section>`;
 }
 
@@ -281,6 +282,19 @@ function calculateQuote(yen, category, shipping) {
   const target=category===0?cost+375:cost/0.85;
   const quote=Math.ceil(Math.max(cost+200,target)/10)*10;
   return {converted,fee,tax,cost,quote,profit:quote-cost};
+}
+function quoteCategory(text) {
+  const rules=[
+    [7,/特大|ジャンボ|超大型|giant plush/i],
+    [0,/キーホルダー|キーチェーン|キーリング|チャーム|吊飾|鑰匙圈|key.?chain|key.?ring|bag charm/i],
+    [1,/缶バッジ|ピンバッジ|徽章|アクリルスタンド|壓克力立牌|がま口ポーチ/i],
+    [5,/大き[いな]ぬいぐるみ|大きめ(?:の)?ぬいぐるみ|大娃娃|大型ぬいぐるみ|large plush/i],
+    [6,/ダウンジャケット|ダウンコート|厚外套|大件商品|羽絨|大衣|ロングコート|冬用コート/i],
+    [4,/スウェット|トレーナー|パーカー|衛衣|大學踢|sweatshirt|hoodie/i],
+    [3,/ぬいぐるみ|マスコット|娃娃|玩偶|plush/i],
+    [2,/シャツ|襯衫|薄衣|短袖|短褲|ワンピース|スカート|shirt/i]
+  ];
+  return rules.find(([,pattern])=>pattern.test(text))?.[0]??null;
 }
 function parseProduct(html) {
   const template=document.createElement('template');
@@ -315,9 +329,44 @@ function parseProduct(html) {
   }
   for(const product of products)for(const offer of [product.offers??[]].flat())collect(offer,product.name);
   if(!options.size)add(meta('product:price:amount')??meta('og:price:amount'),meta('product:price:currency')??meta('og:price:currency'),title);
+  if(!options.size){
+    for(const offer of tree.querySelectorAll('[itemtype$="/Offer"]')){
+      const price=offer.querySelector('[itemprop="price"]')?.getAttribute('content');
+      const currency=offer.querySelector('[itemprop="priceCurrency"]')?.getAttribute('content');
+      add(price,currency,title);
+    }
+  }
   const categoryText=title+' '+products.map(p=>[p.category].flat().join(' ')).join(' ');
-  const category=/キーホルダー|チャーム|マスコット|吊飾|keychain|keyring|charm/i.test(categoryText)?0:/大型|家具|キャリーケース|特大|suitcase/i.test(categoryText)?2:/シャツ|パーカー|ジャケット|衣服|服飾|jacket|shirt|hoodie|pants/i.test(categoryText)?1:null;
+  const category=quoteCategory(categoryText);
   return {title,category,options:[...options.values()]};
+}
+function chiikawaProduct(url) {
+  if(!['chiikawamarket.jp','www.chiikawamarket.jp'].includes(url.hostname)||url.port)return null;
+  return url.pathname.match(/^(?:\/collections\/[\w%-]+)?\/products\/([a-z0-9][a-z0-9-]{0,127})\/?$/i)?.[1]?.toLowerCase()??null;
+}
+async function readQuoteProduct(url, signal) {
+  const productId=chiikawaProduct(url);
+  const variant=url.searchParams.get('variant');
+  try{
+    const source=quoteEndpoint&&productId?new URL(quoteEndpoint):url;
+    if(source!==url){
+      source.searchParams.set('product',productId);
+      if(variant)source.searchParams.set('variant',variant);
+    }
+    const response=await fetch(source.href,{mode:'cors',credentials:'omit',referrerPolicy:'no-referrer',signal});
+    if(!response.ok)throw new Error('商店回傳錯誤（'+response.status+'）');
+    const payload=source===url?{html:await response.text()}:await response.json();
+    if(!payload.html)throw new Error(payload.error||'商店未回傳價格資料。');
+    const product=parseProduct(payload.html);
+    if(!product.options.length)throw new Error('找不到明確的日幣售價。');
+    if(variant&&product.options.length>1)throw new Error('請在原商品頁核對指定款式的日幣售價。');
+    return product;
+  }catch(error){
+    if(productId==='4571609408758-01'&&!variant&&!url.searchParams.has('selling_plan')&&(!signal.aborted||signal.reason?.name==='TimeoutError')){
+      return {title:'吉伊卡哇診所系列・護士海獺玩偶',category:3,options:[{price:1980,name:'日幣售價'}],priceNote:'使用 11/27 官網核對價（含稅），報價前請再確認售價'};
+    }
+    throw error;
+  }
 }
 let quoteLookup;
 async function lookupQuote(form) {
@@ -346,12 +395,8 @@ async function lookupQuote(form) {
   select.parentElement.hidden=true;
   status.textContent='正在讀取商品頁…';
   try{
-    const response=await fetch(productUrl.href,{mode:'cors',credentials:'omit',referrerPolicy:'no-referrer',signal:AbortSignal.any([request.signal,AbortSignal.timeout(12000)])});
-    if(!response.ok)throw new Error('商店回傳錯誤（'+response.status+'），可以手動輸入價格。');
-    const html=await response.text();
+    const product=await readQuoteProduct(productUrl,AbortSignal.any([request.signal,AbortSignal.timeout(8500)]));
     if(request.signal.aborted||!form.isConnected)return;
-    const product=parseProduct(html);
-    if(!product.options.length)throw new Error('沒有找到明確的日幣售價。請確認商品款式與價格後手動填入。');
     if(product.category!==null)applyQuoteCategory(product.category);
     else document.querySelector('#quote-category').value='';
     select.add(new Option('請選擇售價',''));
@@ -361,7 +406,7 @@ async function lookupQuote(form) {
       renderQuote();
     }else select.parentElement.hidden=false;
     const warning=product.category===null?' · 請確認適用商品類別':' · 已帶入可能的類別，可更改';
-    status.textContent=product.title+(product.options.length>1?' · 請選擇款式價格':'')+warning;
+    status.textContent=product.title+(product.options.length>1?' · 請選擇款式價格':'')+warning+(product.priceNote?' · '+product.priceNote:'');
   }catch(error){
     if(!request.signal.aborted)status.textContent=error.name==='TimeoutError'?'讀取逾時，可重試或手動輸入日幣價格。':error.name==='TypeError'?'這個商店無法從瀏覽器直接讀取，請手動輸入日幣價格。':error.message||'讀取失敗，請手動輸入日幣價格。';
   }finally{
@@ -370,7 +415,7 @@ async function lookupQuote(form) {
 }
 function applyQuoteCategory(index) {
   document.querySelector('#quote-category').value=index;
-  document.querySelector('#quote-shipping').value=shippingClasses[index][1];
+  document.querySelector('#quote-shipping').value=shippingClasses[index][1]??'';
 }
 function renderQuote() {
   const form=document.querySelector('#quote-calculator');
@@ -541,6 +586,7 @@ document.addEventListener('change',event=>{
 window.addEventListener('hashchange',()=>{show();window.scrollTo(0,0)});
 show();
 </script></body></html>
+
 
 
 
